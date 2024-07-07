@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.LoginController" alignment="CENTER" spacing="20" styleClass="login">
+    <padding><Insets top="50" right="50" bottom="50" left="50"/></padding>
+    
+    <Label text="Login" styleClass="header-label"/>
+    
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50"/>
+            <ColumnConstraints percentWidth="50"/>
+        </columnConstraints>
+
+        <rowConstraints>
+            <RowConstraints minHeight="30"/>
+            <RowConstraints minHeight="30"/>
+            <RowConstraints minHeight="50"/>
+            <RowConstraints minHeight="50"/>
+        </rowConstraints>
+
+        <Label text="Username:" GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="CENTER_RIGHT"/>
+        <TextField fx:id="usernameField" promptText="Inserisci username" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        
+        <Label text="Password:" GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER_RIGHT"/>
+        <PasswordField fx:id="passwordField" promptText="Inserisci password" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        
+        <HBox spacing="10" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnSpan="2">
+            <Button text="Accedi" onAction="#handleLogin" styleClass="accedi"/>
+            <Button text="Crea nuovo utente" onAction="#handleCreateUser" styleClass="crea"/>
+        </HBox>
+    </GridPane>
+</VBox>

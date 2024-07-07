@@ -1,0 +1,103 @@
+package com.play.controller;
+
+import com.play.model.User;
+import com.play.util.FileHandler;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.List;
+
+public class LoginController {
+  @FXML
+  private TextField usernameField;
+  @FXML
+  private PasswordField passwordField;
+  @FXML
+  private TextField createUsernameField;
+  @FXML
+  private PasswordField createPasswordField;
+  @FXML
+  private TextField firstNameField;
+  @FXML
+  private TextField lastNameField;
+
+  @FXML
+  public void handleLogin(ActionEvent event) {
+    String username = usernameField.getText();
+    String password = passwordField.getText();
+
+    try {
+      List<User> users = FileHandler.readUsers();
+      boolean userFound = users.stream().anyMatch(user -> user.getUsername().equals(username) && user.getPassword().equals(password));
+
+      if (userFound) {
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/com/play/view/homepage.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/com/play/application.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setTitle("Homepage");
+        stage.show();
+      } else {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Autenticazione non riuscita");
+        alert.setHeaderText(null);
+        alert.setContentText("Username o password errati.");
+        alert.showAndWait();
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  public void handleCreateUser(ActionEvent event) {
+    try {
+      Stage stage = (Stage) usernameField.getScene().getWindow();
+      Parent root = FXMLLoader.load(getClass().getResource("/com/play/view/create_user.fxml"));
+      Scene scene = new Scene(root);
+      scene.getStylesheets().add(getClass().getResource("/com/play/application.css").toExternalForm());
+      stage.setScene(scene);
+      stage.setTitle("Crea Nuovo Utente");
+      stage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  public void handleCreateUserForm(ActionEvent event) {
+    String username = createUsernameField.getText();
+    String password = createPasswordField.getText();
+    String firstName = firstNameField.getText();
+    String lastName = lastNameField.getText();
+
+    try {
+      FileHandler.writeUser(new User(username, password, firstName, lastName));
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Registrazione avvenuta con successo");
+      alert.setHeaderText(null);
+      alert.setContentText("Utente creato.");
+      alert.showAndWait();
+
+      // Redirect to login page
+      Stage stage = (Stage) createUsernameField.getScene().getWindow();
+      Parent root = FXMLLoader.load(getClass().getResource("/com/play/view/login.fxml"));
+      Scene scene = new Scene(root);
+      scene.getStylesheets().add(getClass().getResource("/com/play/application.css").toExternalForm());
+      stage.setScene(scene);
+      stage.setTitle("Login");
+      stage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="src/com.play.controller.ExerciseController">
+    <ListView fx:id="exerciseListView" VBox.vgrow="ALWAYS"/>
+    <TextArea fx:id="descriptionArea" editable="false" VBox.vgrow="ALWAYS"/>
+    <TextArea fx:id="solutionArea" VBox.vgrow="ALWAYS"/>
+</VBox>

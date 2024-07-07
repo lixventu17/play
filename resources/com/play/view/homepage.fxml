@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.HomeController" hgap="10.0" vgap="10.0" alignment="CENTER">
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER" spacing="10.0">
+        <ImageView fx:id="exerciseImage1" onMouseClicked="#handleExercise1Click" fitWidth="100.0" fitHeight="100.0" preserveRatio="true"/>
+        <Text text="Exercise 1: Basic Loops" onMouseClicked="#handleExercise1Click"/>
+    </VBox>
+    <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER" spacing="10.0">
+        <ImageView fx:id="exerciseImage2" onMouseClicked="#handleExercise2Click" fitWidth="100.0" fitHeight="100.0" preserveRatio="true"/>
+        <Text text="Exercise 2: Conditionals" onMouseClicked="#handleExercise2Click"/>
+    </VBox>
+</GridPane>

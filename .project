@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>PLAY</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>resources/com/play/images/1.png</name>
+			<type>1</type>
+			<location>/home/sviluppo/Projects/PLAY/resources/com/play/images/1.png</location>
+		</link>
+		<link>
+			<name>resources/com/play/images/2.png</name>
+			<type>1</type>
+			<location>/home/sviluppo/Projects/PLAY/resources/com/play/images/2.png</location>
+		</link>
+	</linkedResources>
+</projectDescription>

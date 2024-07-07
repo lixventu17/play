@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.ExerciseDetailsController" alignment="CENTER" spacing="20.0">
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+    <Text fx:id="exerciseTitle" text="Dettagli dell'esercizio" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <Text fx:id="exerciseDescription" text="Descrizione dell'esercizio" wrappingWidth="300"/>
+    <Text fx:id="difficultyText" text="Difficoltà"/>
+    <ComboBox fx:id="difficultyComboBox" onAction="#handleDifficultySelection"/>
+    <HBox spacing="10.0" alignment="CENTER">
+        <Button text="Torna all'Homepage" onAction="#handleBackToHomepage"/>
+        <Button text="Inizia Esercizio" onAction="#handleStartExercise"/>
+    </HBox>
+</VBox>

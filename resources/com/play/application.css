@@ -1,0 +1,51 @@
+.login {
+	-fx-background-color: #b6d7a8;
+}
+
+.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.accedi {
+	-fx-background-color: #f1982e;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20 10 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.crea {
+	-fx-background-color: #4f81bd;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20 10 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+.text-field, .password-field {
+    -fx-border-color: #d3d3d3;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+}
+
+VBox {
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-spacing: 5;
+}
+
+ImageView {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
+    -fx-cursor: hand;
+}
