@@ -109,18 +109,28 @@ public class ExerciseDetailsController {
   @FXML
   private void handleStartExercise() {
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/play/view/exercise_view.fxml"));
-      Parent root = loader.load();
-      
-      // Imposta i dettagli dell'esercizio nel nuovo controller
-      ExerciseController controller = loader.getController();
-      controller.startExercise(exerciseId, difficulty);
-      
-      Stage stage = (Stage) exerciseTitle.getScene().getWindow();
-      Scene scene = new Scene(root);
-      stage.setScene(scene);
-      stage.setTitle("Exercise");
-      stage.show();
+      if (difficulty.equals("principiante")) {
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/play/view/quiz.fxml"));
+	    Parent root = loader.load();
+	    QuizController quizController = loader.getController();
+	    quizController.loadExercise(exerciseId, difficulty);
+	    Stage stage = (Stage) startExerciseButton.getScene().getWindow();
+	    Scene scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.setTitle("Esercizio " + exerciseId + " (Difficoltà: " + difficulty + ")");
+	    stage.show();
+      }
+      else {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/play/view/completion_exercise.fxml"));
+        Parent root = loader.load();
+        CompletionExerciseController controller = loader.getController();
+        controller.loadExercise(exerciseId, difficulty);
+	    Stage stage = (Stage) startExerciseButton.getScene().getWindow();
+	    Scene scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.setTitle("Esercizio " + exerciseId + " (Difficoltà: " + difficulty + ")");
+	    stage.show();
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }

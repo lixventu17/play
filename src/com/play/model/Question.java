@@ -1,28 +1,43 @@
 package com.play.model;
 
-import java.util.List;
-
 public class Question {
-
-    private String question;
-    private List<String> options;
+    private String questionText;
+    private String option1;
+    private String option2;
+    private String option3;
+    private String option4;
     private String correctAnswer;
 
-    public Question(String question, List<String> options, String correctAnswer) {
-        this.question = question;
-        this.options = options;
+    public Question(String questionText, String option1, String option2, String option3, String option4, String correctAnswer) {
+        this.questionText = questionText;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
         this.correctAnswer = correctAnswer;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public List<String> getOptions() {
-        return options;
+    public String getOption1() {
+        return option1;
     }
 
-    public boolean isCorrect(String answer) {
-        return correctAnswer.equals(answer);
+    public String getOption2() {
+        return option2;
+    }
+
+    public String getOption3() {
+        return option3;
+    }
+
+    public String getOption4() {
+        return option4;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 }

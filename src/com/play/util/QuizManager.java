@@ -7,7 +7,8 @@ import com.play.model.Question;
 
 public class QuizManager {
 
-    private List<Question> questions;
+    private static List<Question> questions;
+    private static int correctAnswers;
     private int currentQuestionIndex;
     private int score;
     private String exerciseId;
@@ -15,34 +16,73 @@ public class QuizManager {
 
     public QuizManager(String exerciseId, String difficulty) {
         questions = new ArrayList<>();
-        loadQuestions(exerciseId, difficulty);
+//        loadQuestions(exerciseId, difficulty);
         currentQuestionIndex = 0;
         score = 0;
     }
 
-    private void loadQuestions(String exerciseId, String difficulty) {
-        String fileName = "resources/com/play/questions/" + exerciseId + "_" + difficulty + ".txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-            	if (line.startsWith("Q: ")) {
-            		String questionText = line.substring(3);
-                    List<String> options = new ArrayList<>();
-                    String correctOption = "";
-                    for (int i = 0; i <= 4; i++) {
-                    	if (i == 4) {
-                    		correctOption = reader.readLine().substring(3);
-                    	}
-                    	else {
-                            options.add(reader.readLine().substring(3));
-                    	}
-                    }
-                    questions.add(new Question(questionText, options, correctOption));
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//    public static List<Question> loadQuestions(String filePath) {
+//        List<Question> questions = new ArrayList<>();
+//        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//            	if (line.startsWith("Q: ")) {
+//	        		String questionText = line.substring(3);
+//	                List<String> options = new ArrayList<>();
+//	                String correctOption = "";
+//	                for (int i = 0; i <= 4; i++) {
+//	                	if (i == 4) {
+//	                		correctOption = reader.readLine().substring(3);
+//	                	}
+//	                	else {
+//	                		options.add(reader.readLine().substring(3));
+//	                	}
+//	                }
+//	                questions.add(new Question(questionText, options, correctOption));
+//            	}
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return questions;
+//    }
+
+//    private void loadQuestions(String exerciseId, String difficulty) {
+//        String fileName = "resources/com/play/questions/" + exerciseId + "_" + difficulty + ".txt";
+//        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//            	if (line.startsWith("Q: ")) {
+//            		String questionText = line.substring(3);
+//                    List<String> options = new ArrayList<>();
+//                    String correctOption = "";
+//                    for (int i = 0; i <= 4; i++) {
+//                    	if (i == 4) {
+//                    		correctOption = reader.readLine().substring(3);
+//                    	}
+//                    	else {
+//                            options.add(reader.readLine().substring(3));
+//                    	}
+//                    }
+//                    questions.add(new Question(questionText, options, correctOption));
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public static void setQuestions(List<Question> questions) {
+        QuizManager.questions = questions;
+        QuizManager.correctAnswers = 0;
+    }
+
+    public static void incrementCorrectAnswers() {
+        correctAnswers++;
+    }
+
+    public static boolean isExerciseCompleted100() {
+        return correctAnswers == questions.size();
     }
 
     public Question getCurrentQuestion() {
@@ -58,11 +98,11 @@ public class QuizManager {
         return getCurrentQuestion();
     }
 
-    public void submitAnswer(String answer) {
-        if (questions.get(currentQuestionIndex).isCorrect(answer)) {
-            score++;
-        }
-    }
+//    public void submitAnswer(String answer) {
+//        if (questions.get(currentQuestionIndex).isCorrect(answer)) {
+//            score++;
+//        }
+//    }
 
     public int getScore() {
         return score;

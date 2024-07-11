@@ -1,148 +1,104 @@
 package com.play.controller;
 
 import com.play.model.Question;
+import com.play.util.FileHandler;
 import com.play.util.QuizManager;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 public class QuizController {
+    @FXML
+    private Label questionText;
+    @FXML
+    private Label option1;
+    @FXML
+    private Label option2;
+    @FXML
+    private Label option3;
+    @FXML
+    private Label option4;
+    @FXML
+    private Button finishButton;
 
-    @FXML
-    private Label questionLabel;
-    @FXML
-    private RadioButton option1;
-    @FXML
-    private RadioButton option2;
-    @FXML
-    private RadioButton option3;
-    @FXML
-    private RadioButton option4;
-    @FXML
-    private Button nextButton;
-    @FXML
-    private Button exitButton;
-    @FXML
-    private Label scoreLabel;
-    
-    private ToggleGroup optionsGroup;
-    private QuizManager quizManager;
     private String exerciseId;
     private String difficulty;
 
-    public void initialize() {
-        optionsGroup = new ToggleGroup();
-        option1.setToggleGroup(optionsGroup);
-        option2.setToggleGroup(optionsGroup);
-        option3.setToggleGroup(optionsGroup);
-        option4.setToggleGroup(optionsGroup);
-    }
+    private List<Question> questions;
+    private int currentQuestionIndex = 0;
 
-    public void setExerciseDetails(String exerciseId, String difficulty) {
+    public void loadExercise(String exerciseId, String difficulty) {
         this.exerciseId = exerciseId;
         this.difficulty = difficulty;
 
-        quizManager = new QuizManager(exerciseId, difficulty);
-        loadQuestion(quizManager.getCurrentQuestion());
-        updateScore();
+        questions = FileHandler.loadQuestions(exerciseId, difficulty);
+        QuizManager.setQuestions(questions);
+        showQuestion();
     }
 
-    private void loadQuestion(Question question) {
-        questionLabel.setText(question.getQuestion());
-        List<String> options = question.getOptions();
-        if (options.size() >= 4) {
-            option1.setText(options.get(0));
-            option2.setText(options.get(1));
-            option3.setText(options.get(2));
-            option4.setText(options.get(3));
-
-            ToggleGroup group = option1.getToggleGroup();
-            if (group != null) {
-            	group.selectToggle(null);
-            }
+    private void showQuestion() {
+        if (currentQuestionIndex < questions.size()) {
+            Question question = questions.get(currentQuestionIndex);
+            questionText.setText(question.getQuestionText());
+            option1.setText(question.getOption1());
+            option2.setText(question.getOption2());
+            option3.setText(question.getOption3());
+            option4.setText(question.getOption4());
         } else {
-            System.out.println("Error: Each question must have exactly four options.");
+            finishQuiz();
         }
-    }
-
-    private void updateScore() {
-        scoreLabel.setText("Punteggio: " + quizManager.getScore());
     }
 
     @FXML
-    private void handleNextQuestion() {
-        RadioButton selectedOption = (RadioButton) optionsGroup.getSelectedToggle();
-        if (selectedOption != null) {
-            String answer = selectedOption.getText();
-            quizManager.submitAnswer(answer);
-            if (quizManager.hasNextQuestion()) {
-                loadQuestion(quizManager.nextQuestion());
-            } else {
-                showResult();
-            }
-            updateScore();
-        }
+    private void handleOption1() {
+        checkAnswer(option1.getText());
     }
 
-    private void showResult() {
+    @FXML
+    private void handleOption2() {
+        checkAnswer(option2.getText());
+    }
+
+    @FXML
+    private void handleOption3() {
+        checkAnswer(option3.getText());
+    }
+
+    @FXML
+    private void handleOption4() {
+        checkAnswer(option4.getText());
+    }
+
+    private void checkAnswer(String selectedOption) {
+        Question question = questions.get(currentQuestionIndex);
+        if (question.getCorrectAnswer().equals(selectedOption)) {
+            QuizManager.incrementCorrectAnswers();
+        }
+        currentQuestionIndex++;
+        showQuestion();
+    }
+
+    @FXML
+    private void finishQuiz() {
+        boolean isCompleted = QuizManager.isExerciseCompleted100();
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/play/view/result.fxml"));
             Parent root = loader.load();
-
             ResultController controller = loader.getController();
-            controller.setResults(quizManager.getScore(), quizManager.getTotalQuestions());
-
-            Stage stage = (Stage) questionLabel.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Result");
+            controller.setResult(isCompleted, exerciseId, difficulty);
+            Stage stage = (Stage) finishButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    @FXML
-    private void handleExit() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirm Exit");
-        alert.setHeaderText("You are about to exit the exercise.");
-        alert.setContentText("If you exit now, the exercise will be marked as failed. Do you want to proceed?");
-
-        ButtonType yesButton = new ButtonType("Yes");
-        ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(yesButton, noButton);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == yesButton) {
-            // Save progress as failure and exit
-            quizManager.saveProgress(false);  // Save as failed
-            navigateToHomepage();
-        }
-    }
-
-	private void navigateToHomepage() {
-        quizManager.saveProgress(false);
-
-	    try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/play/view/homepage.fxml"));
-	        Parent root = loader.load();
-	        Stage stage = (Stage) questionLabel.getScene().getWindow();
-	        Scene scene = new Scene(root);
-	        stage.setScene(scene);
-	        stage.setTitle("Homepage");
-	        stage.show();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	}
 }

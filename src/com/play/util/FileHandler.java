@@ -1,6 +1,8 @@
 package com.play.util;
 
 import com.play.model.User;
+import com.play.model.Question;
+import com.play.model.CompletionQuestion;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -39,5 +41,45 @@ public class FileHandler {
       e.printStackTrace();
     }
     return null;
+  }
+
+  public static List<Question> loadQuestions(String exerciseId, String difficulty) {
+      List<Question> questions = new ArrayList<>();
+      String filePath = "resources/com/play/questions/" + exerciseId + "_" + difficulty + ".txt";
+      try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+          String line;
+          while ((line = reader.readLine()) != null) {
+              String questionText = line;
+              String option1 = reader.readLine();
+              String option2 = reader.readLine();
+              String option3 = reader.readLine();
+              String option4 = reader.readLine();
+              String correctAnswer = reader.readLine();
+              reader.readLine(); // per saltare la riga vuota tra le domande
+              
+              Question question = new Question(questionText, option1, option2, option3, option4, correctAnswer);
+              questions.add(question);
+          }
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+      
+      return questions;
+  }
+
+  public static List<CompletionQuestion> loadCompletionQuestions(String filePath) {
+      List<CompletionQuestion> questions = new ArrayList<>();
+      try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+          String line;
+          while ((line = reader.readLine()) != null) {
+              String[] parts = line.split(";");
+              if (parts.length == 2) {
+                  questions.add(new CompletionQuestion(parts[0], parts[1]));
+              }
+          }
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+      return questions;
   }
 }

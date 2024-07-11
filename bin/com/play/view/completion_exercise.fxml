@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.CompletionExerciseController" alignment="CENTER" spacing="10.0">
+    <Label fx:id="sentenceLabel" text="Frase"/>
+    <TextField fx:id="answerField" promptText="Inserisci la tua risposta"/>
+    <Label fx:id="feedbackLabel"/>
+    <Button text="Verifica" onAction="#handleCheckAnswer"/>
+    <Button fx:id="nextButton" text="Prossima Domanda" onAction="#handleNextQuestion"/>
+</VBox>

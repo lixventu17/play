@@ -1,0 +1,10 @@
+La classe principale in un programma Java deve essere definita con la parola chiave _____.;public
+Un metodo che non restituisce alcun valore deve avere il tipo di ritorno _____.;void
+In Java, un blocco di codice che può generare un'eccezione deve essere racchiuso all'interno di un _____ blocco.;try
+La parola chiave utilizzata per creare un'istanza di una classe è _____.;new
+Per definire una costante in Java, si utilizza la parola chiave _____.;final
+Un array in Java ha un numero fisso di elementi e l'indice del primo elemento è _____.;0
+La funzione main in un programma Java ha sempre la firma _____.;public static void main(String[] args)
+In Java, per ereditare da una classe si usa la parola chiave _____.;extends
+L'interfaccia in Java è definita con la parola chiave _____.;interface
+Per confrontare il contenuto di due stringhe in Java, si utilizza il metodo _____.;equals

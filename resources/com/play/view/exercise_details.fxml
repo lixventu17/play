@@ -17,6 +17,6 @@
     <ComboBox fx:id="difficultyComboBox" onAction="#handleDifficultySelection"/>
     <HBox spacing="10.0" alignment="CENTER">
         <Button text="Torna all'Homepage" onAction="#handleBackToHomepage"/>
-        <Button text="Inizia Esercizio" onAction="#handleStartExercise"/>
+        <Button fx:id="startExerciseButton" text="Inizia Esercizio" onAction="#handleStartExercise"/>
     </HBox>
 </VBox>

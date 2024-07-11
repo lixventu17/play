@@ -1,69 +1,69 @@
-Q: Qual è la sintassi corretta per stampare un messaggio in Java?
-A: System.println("Ciao");
-B: System.out("Ciao");
-C: System.out.println("Ciao");
-D: System.print("Ciao");
-R: System.out.println("Ciao");
+Qual è la sintassi corretta per stampare un messaggio in Java?
+System.println("Ciao");
+System.out("Ciao");
+System.out.println("Ciao");
+System.print("Ciao");
+System.out.println("Ciao");
 
-Q: Qual è il metodo corretto per ottenere la lunghezza di una stringa in Java?
-A: string.length;
-B: string.len();
-C: string.size();
-D: string.length();
-R: string.length();
+Qual è il metodo corretto per ottenere la lunghezza di una stringa in Java?
+string.length;
+string.len();
+string.size();
+string.length();
+string.length();
 
-Q: Quale parola chiave è utilizzata per creare una nuova istanza di una classe in Java?
-A: instance
-B: new
-C: create
-D: init
-R: new
+Quale parola chiave è utilizzata per creare una nuova istanza di una classe in Java?
+instance
+new
+create
+init
+new
 
-Q: Come si dichiara una variabile intera in Java?
-A: int x;
-B: integer x;
-C: num x;
-D: x int;
-R: int x;
+Come si dichiara una variabile intera in Java?
+int x;
+integer x;
+num x;
+x int;
+int x;
 
-Q: Qual è l'operatore di uguaglianza in Java?
-A: =
-B: ==
-C: ===
-D: !=
-R: ==
+Qual è l'operatore di uguaglianza in Java?
+=
+==
+===
+!=
+==
 
-Q: Quale parola chiave viene utilizzata per ereditare una classe in Java?
-A: inherits
-B: extends
-C: implements
-D: overrides
-R: extends
+Quale parola chiave viene utilizzata per ereditare una classe in Java?
+inherits
+extends
+implements
+overrides
+extends
 
-Q: Qual è il costrutto corretto per un ciclo for in Java?
-A: for (int i; i < 10; i++)
-B: for (int i = 0; i < 10; i++)
-C: for i in range(10)
-D: for (int i = 0, i < 10, i++)
-R: for (int i = 0; i < 10; i++)
+Qual è il costrutto corretto per un ciclo for in Java?
+for (int i; i < 10; i++)
+for (int i = 0; i < 10; i++)
+for i in range(10)
+for (int i = 0, i < 10, i++)
+for (int i = 0; i < 10; i++)
 
-Q: Qual è la classe principale per le interfacce grafiche in Java?
-A: Graphics
-B: UI
-C: Swing
-D: JFrame
-R: JFrame
+Qual è il metodo corretto per ottenere la lunghezza di una stringa in Java?
+string.length;
+string.len();
+string.size();
+string.length();
+string.length();
 
-Q: Come si chiama il metodo che viene chiamato quando si crea un'istanza di una classe in Java?
-A: class()
-B: init()
-C: new()
-D: constructor()
-R: constructor()
+Come si chiama il metodo che viene chiamato quando si crea un'istanza di una classe in Java?
+class()
+init()
+new()
+constructor()
+constructor()
 
-Q: Qual è il tipo di dato utilizzato per rappresentare una sequenza di caratteri in Java?
-A: String
-B: Character
-C: char[]
-D: string
-R: String
+Qual è il tipo di dato utilizzato per rappresentare una sequenza di caratteri in Java?
+String
+Character
+char[]
+string
+String
