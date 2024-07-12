@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.play.controller.ResultController">
-    <Text fx:id="resultText" style="-fx-font-size: 24px;"/>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.ResultController" alignment="CENTER" spacing="10">
+    <Label fx:id="resultText"/>
     <Button fx:id="nextLevelButton" text="Next Level" onAction="#handleNextLevel"/>
-    <Button fx:id="homepageButton" text="Homepage" onAction="#handleHomepage"/>
+    <Button text="Homepage" onAction="#handleBackToHomepage"/>
 </VBox>

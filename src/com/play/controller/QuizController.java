@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,22 +19,39 @@ import java.util.List;
 public class QuizController {
     @FXML
     private Label questionText;
+
     @FXML
-    private Label option1;
+    private RadioButton option1;
     @FXML
-    private Label option2;
+    private RadioButton option2;
     @FXML
-    private Label option3;
+    private RadioButton option3;
     @FXML
-    private Label option4;
+    private RadioButton option4;
+
     @FXML
     private Button finishButton;
+
+    @FXML
+    private Label scoreLabel;
 
     private String exerciseId;
     private String difficulty;
 
     private List<Question> questions;
     private int currentQuestionIndex = 0;
+    private int score = 0;
+
+    private ToggleGroup toggleGroup;
+
+    @FXML
+    public void initialize() {
+        toggleGroup = new ToggleGroup();
+        option1.setToggleGroup(toggleGroup);
+        option2.setToggleGroup(toggleGroup);
+        option3.setToggleGroup(toggleGroup);
+        option4.setToggleGroup(toggleGroup);
+    }
 
     public void loadExercise(String exerciseId, String difficulty) {
         this.exerciseId = exerciseId;
@@ -51,54 +70,61 @@ public class QuizController {
             option2.setText(question.getOption2());
             option3.setText(question.getOption3());
             option4.setText(question.getOption4());
+            toggleGroup.selectToggle(null); // Deselect previous selection
         } else {
             finishQuiz();
         }
     }
 
     @FXML
-    private void handleOption1() {
-        checkAnswer(option1.getText());
-    }
-
-    @FXML
-    private void handleOption2() {
-        checkAnswer(option2.getText());
-    }
-
-    @FXML
-    private void handleOption3() {
-        checkAnswer(option3.getText());
-    }
-
-    @FXML
-    private void handleOption4() {
-        checkAnswer(option4.getText());
-    }
-
-    private void checkAnswer(String selectedOption) {
-        Question question = questions.get(currentQuestionIndex);
-        if (question.getCorrectAnswer().equals(selectedOption)) {
-            QuizManager.incrementCorrectAnswers();
-        }
+    private void handleSubmit() {
+        checkAnswer();
         currentQuestionIndex++;
         showQuestion();
     }
 
+    private void checkAnswer() {
+        RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
+        if (selectedRadioButton != null) {
+            String selectedOption = selectedRadioButton.getText();
+            Question question = questions.get(currentQuestionIndex);
+            if (question.getCorrectAnswer().equals(selectedOption)) {
+                score++;
+                QuizManager.incrementCorrectAnswers();
+            }
+            scoreLabel.setText("Punteggio: " + score);
+        }
+    }
+
     @FXML
     private void finishQuiz() {
-        boolean isCompleted = QuizManager.isExerciseCompleted100();
-
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/play/view/result.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/play/view/homepage.fxml"));
             Parent root = loader.load();
-            ResultController controller = loader.getController();
-            controller.setResult(isCompleted, exerciseId, difficulty);
+            Scene scene = new Scene(root);
             Stage stage = (Stage) finishButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
+            stage.setTitle("Homepage");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+//    @FXML
+//    private void finishQuiz() {
+//        boolean isCompleted = QuizManager.isExerciseCompleted100();
+//
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/play/view/result.fxml"));
+//            Parent root = loader.load();
+//            ResultController controller = loader.getController();
+//            controller.setResult(isCompleted, exerciseId, difficulty);
+//            Stage stage = (Stage) finishButton.getScene().getWindow();
+//            stage.setScene(new Scene(root));
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

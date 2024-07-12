@@ -67,9 +67,10 @@ public class FileHandler {
       return questions;
   }
 
-  public static List<CompletionQuestion> loadCompletionQuestions(String filePath) {
+  public static List<CompletionQuestion> loadCompletionQuestions(String exerciseId, String difficulty) {
       List<CompletionQuestion> questions = new ArrayList<>();
-      try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+      String fileName = "resources/com/play/questions/" + exerciseId + "_" + difficulty + ".txt";
+      try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
           String line;
           while ((line = reader.readLine()) != null) {
               String[] parts = line.split(";");

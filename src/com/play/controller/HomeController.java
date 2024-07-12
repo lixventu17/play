@@ -44,7 +44,7 @@ public class HomeController {
 
   @FXML
   private void handleExercise1Click() {
-    showExerciseDetails("Exercise 1: Basic Loops", "This exercise will teach you the basics of loops in programming.", "exercise1");
+    showExerciseDetails("Esercizio 1: Concetti Base", "Questo esercizio ti insegnerà i concetti base della programmazione in java.", "exercise1");
   }
 
   @FXML

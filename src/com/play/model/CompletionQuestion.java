@@ -1,16 +1,16 @@
 package com.play.model;
 
 public class CompletionQuestion {
-    private String sentence;
+    private String questionText;
     private String correctAnswer;
 
-    public CompletionQuestion(String sentence, String correctAnswer) {
-        this.sentence = sentence;
+    public CompletionQuestion(String questionText, String correctAnswer) {
+        this.questionText = questionText;
         this.correctAnswer = correctAnswer;
     }
 
-    public String getSentence() {
-        return sentence;
+    public String getQuestionText() {
+        return questionText;
     }
 
     public String getCorrectAnswer() {

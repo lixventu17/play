@@ -6,15 +6,15 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.QuizController" alignment="CENTER" spacing="20.0">
-    <Label fx:id="questionLabel" text="Domanda"/>
-    <VBox fx:id="optionsBox" spacing="10.0">
-	    <RadioButton fx:id="option1" text="Opzione 1"/>
-	    <RadioButton fx:id="option2" text="Opzione 2"/>
-	    <RadioButton fx:id="option3" text="Opzione 3"/>
-	    <RadioButton fx:id="option4" text="Opzione 4"/>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.QuizController">
+    <Label fx:id="questionText"/>
+    <VBox>
+        <RadioButton fx:id="option1" toggleGroup="$toggleGroup"/>
+        <RadioButton fx:id="option2" toggleGroup="$toggleGroup"/>
+        <RadioButton fx:id="option3" toggleGroup="$toggleGroup"/>
+        <RadioButton fx:id="option4" toggleGroup="$toggleGroup"/>
     </VBox>
+    <Button text="Submit" onAction="#handleSubmit"/>
+    <Button text="Finish" fx:id="finishButton" onAction="#finishQuiz"/>
     <Label fx:id="scoreLabel" text="Punteggio: 0"/>
-    <Button text="Next" onAction="#handleNextQuestion"/>
-    <Button text="Exit" onAction="#handleExit"/>
 </VBox>
