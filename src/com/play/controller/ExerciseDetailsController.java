@@ -1,5 +1,6 @@
 package com.play.controller;
 
+import com.play.util.FileHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.*;
+import java.util.List;
 
 public class ExerciseDetailsController {
   @FXML
@@ -22,38 +24,70 @@ public class ExerciseDetailsController {
   private ComboBox<String> difficultyComboBox;
   @FXML
   private Button startExerciseButton;
+  @FXML
+  private Button startQuizButton;
+  @FXML
+  private Button startCompletionButton;
+  @FXML
+  private Button viewResultsButton;
 
+  private boolean completed;
   private String exerciseId;
   private String difficulty;
 
   @FXML
-  public void initialize() {
-    // Inizializza la visibilità dei componenti
-    if (difficultyComboBox != null) {
-      difficultyComboBox.setVisible(false);
-    }
-    if (startExerciseButton != null) {
-      startExerciseButton.setVisible(true);
-    }
+  public void initialize(String username) {
+      List<String> progress = FileHandler.loadUserProgress(username);
+      for (String entry : progress) {
+          String[] parts = entry.split(";");
+          if (parts[0].equals(exerciseId)) {
+              this.difficulty = parts[1];
+              break;
+          }
+      }
+	  // Inizializza la visibilità dei componenti
+	  if (difficultyComboBox != null) {
+	      difficultyComboBox.setVisible(false);
+	  }
+	  if (startExerciseButton != null) {
+	      startExerciseButton.setVisible(true);
+	  }
+  }
+
+  public void setExerciseId(String exerciseId) {
+      this.exerciseId = exerciseId;
+  }
+
+  public void setDifficulty(String difficulty) {
+      this.difficulty = difficulty;
   }
 
   public void setExerciseDetails(String title, String description, String exerciseId, String difficulty) {
     exerciseTitle.setText(title);
     exerciseDescription.setText(description);
     this.exerciseId = exerciseId;
-    this.difficulty = difficulty;
-    difficultyText.setText("Difficoltà: " + difficulty);
 
     // Check if the user has completed the expert level
-    if (difficulty.equals("esperto") && isExerciseCompleted()) {
+    if (completed == true) {
       if (difficultyComboBox != null) {
         difficultyComboBox.setVisible(true);
         difficultyComboBox.getItems().addAll("principiante", "intermedio", "esperto");
+        difficultyComboBox.setOnAction(event -> {
+          String selectedDifficulty = difficultyComboBox.getValue();
+          if (selectedDifficulty != null) {
+            this.difficulty = selectedDifficulty;
+            difficultyText.setText("Difficoltà: " + selectedDifficulty);
+            startExerciseButton.setDisable(false);
+          }
+        });
       }
       if (startExerciseButton != null) {
-        startExerciseButton.setVisible(false);
+        startExerciseButton.setVisible(true);
+        startExerciseButton.setDisable(true);
       }
     } else {
+      this.difficulty = difficulty;
+      difficultyText.setText("Difficoltà: " + difficulty);
       if (difficultyComboBox != null) {
         difficultyComboBox.setVisible(false);
       }
@@ -155,11 +189,9 @@ public class ExerciseDetailsController {
     difficultyText.setText("Difficoltà: " + difficulty);
   }
 
-  private boolean isExerciseCompleted() {
-    // Logica per verificare se l'esercizio è stato completato
-    // Potrebbe leggere da un file o database
-    // Per ora simuliamo che l'esercizio avanzato è completato
-    return true;
+  public boolean isExerciseCompleted(boolean answer) {
+	completed = answer;
+    return completed;
   }
 
   @FXML

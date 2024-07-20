@@ -5,12 +5,12 @@ System.out.println("Ciao");
 System.print("Ciao");
 System.out.println("Ciao");
 
-Qual è il metodo corretto per ottenere la lunghezza di una stringa in Java?
-string.length;
-string.len();
-string.size();
-string.length();
-string.length();
+Come si chiama il metodo principale da cui parte l'esecuzione di un programma Java?
+class
+public
+master
+main
+main
 
 Quale parola chiave è utilizzata per creare una nuova istanza di una classe in Java?
 instance

@@ -6,6 +6,7 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.ResultController" alignment="CENTER" spacing="10">
     <Label fx:id="resultText"/>
-    <Button fx:id="nextLevelButton" text="Next Level" onAction="#handleNextLevel"/>
+    <Button fx:id="nextLevelButton" text="Livello successivo" onAction="#handleNextLevel"/>
+    <Button fx:id="retryButton" text="Riprova" onAction="#handleRetryLevel"/>
     <Button text="Homepage" onAction="#handleBackToHomepage"/>
 </VBox>

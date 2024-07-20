@@ -1,0 +1,10 @@
+Dichiara una variabile intera "eta" e inizializzala con il valore 25.:int eta = 25;
+Crea un'istanza di una classe Automobile con marca Fiat e modello Punto.:Automobile auto = new Automobile("Fiat", "Punto");
+Definisci un metodo pubblico che restituisce un booleano e accetta una stringa come parametro.:public boolean isValid(String input)
+Crea un array di interi chiamato numeri con i valori 1, 2 e 3.:int[] numeri = {1, 2, 3};
+Scrivi una riga di codice per importare la classe ArrayList dal pacchetto java.util.:import java.util.ArrayList;
+Inizializza una lista di stringhe nomi usando ArrayList.:List<String> nomi = new ArrayList<>();
+Definisci una classe Animale che eredita da una classe EssereVivente.:public class Animale extends EssereVivente
+Definisci un costruttore per una classe Studente che accetta nome e matricola.:public Studente(String nome, int matricola)
+Come si scrive una condizione if per verificare se x è maggiore di 10?:if (x > 10)
+Come si crea una variabile stringa chiamata saluto con valore "Ciao"?:String saluto = "Ciao";

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
@@ -13,5 +15,10 @@
     <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER" spacing="10.0">
         <ImageView fx:id="exerciseImage2" onMouseClicked="#handleExercise2Click" fitWidth="100.0" fitHeight="100.0" preserveRatio="true"/>
         <Text text="Exercise 2: Conditionals" onMouseClicked="#handleExercise2Click"/>
+    </VBox>
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="CENTER" spacing="10.0">
+    	<Label fx:id="usernameLabel"/>
+        <Label fx:id="nameLabel"/>
+        <Button text="Logout" onAction="#handleLogout"/>
     </VBox>
 </GridPane>

@@ -1,6 +1,10 @@
 package com.play.controller;
 
+import com.play.util.FileHandler;
+import com.play.util.Util;
+import com.play.util.UserSession;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -8,38 +12,38 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class HomeController {
   @FXML
   private ImageView exerciseImage1;
   @FXML
   private ImageView exerciseImage2;
+  @FXML
+  private Label usernameLabel;
+  @FXML
+  private Label nameLabel;
 
-  private Map<String, String> userProgress;
+  private List<String> userProgress;
+  private boolean completed;
 
   public void initialize() {
     // Initialize the images (example)
     exerciseImage1.setImage(new Image(getClass().getResourceAsStream("/com/play/images/1.png")));
     exerciseImage2.setImage(new Image(getClass().getResourceAsStream("/com/play/images/2.png")));
 
-    // Load user progress
-    userProgress = loadUserProgress();
-  }
-
-  private Map<String, String> loadUserProgress() {
-    Map<String, String> progress = new HashMap<>();
-    try (BufferedReader reader = new BufferedReader(new FileReader("resources/com/play/user_progress.txt"))) {
-      String line;
-      while ((line = reader.readLine()) != null) {
-        String[] parts = line.split("=");
-        progress.put(parts[0], parts[1]);
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
+    // Set user details from the session
+    UserSession session = UserSession.getInstance();
+    if (usernameLabel != null) {
+      usernameLabel.setText("Username: " + session.getUsername());
     }
-    return progress;
+    if (nameLabel != null) {
+      nameLabel.setText("Nome: " + session.getFirstName() + " " + session.getLastName());
+    }
+
+    // Load user progress
+    userProgress = FileHandler.loadDifficult(session.getUsername());
+    completed = FileHandler.exerciseCompleted();
   }
 
   @FXML
@@ -59,16 +63,31 @@ public class HomeController {
       Parent root = loader.load();
 
       ExerciseDetailsController controller = loader.getController();
-      String difficulty = userProgress.getOrDefault(exerciseId, "principiante");
+      String difficulty = "principiante";
+      if (userProgress.isEmpty() == false) {
+          String[] parts = userProgress.getLast().split(";");
+          if (parts[1].equals("esperto") && completed == true) {
+        	  controller.isExerciseCompleted(true);
+          }
+    	  difficulty = parts[1];
+      }
       controller.setExerciseDetails(title, description, exerciseId, difficulty);
 
       Stage stage = (Stage) exerciseImage1.getScene().getWindow();
       Scene scene = new Scene(root);
       stage.setScene(scene);
-      stage.setTitle("Exercise Details");
+      stage.setTitle("Dettaglio Esercizio");
       stage.show();
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  @FXML
+  private void handleLogout() {
+	// Clear the user session
+	UserSession.getInstance().clearSession();
+    Stage stage = (Stage) exerciseImage1.getScene().getWindow();
+    Util.changeScene(stage, "/com/play/view/login.fxml", "Login");
   }
 }

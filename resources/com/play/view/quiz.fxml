@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.QuizController">
-    <Label fx:id="questionText"/>
-    <VBox>
-        <RadioButton fx:id="option1" toggleGroup="$toggleGroup"/>
-        <RadioButton fx:id="option2" toggleGroup="$toggleGroup"/>
-        <RadioButton fx:id="option3" toggleGroup="$toggleGroup"/>
-        <RadioButton fx:id="option4" toggleGroup="$toggleGroup"/>
-    </VBox>
-    <Button text="Submit" onAction="#handleSubmit"/>
-    <Button text="Finish" fx:id="finishButton" onAction="#finishQuiz"/>
-    <Label fx:id="scoreLabel" text="Punteggio: 0"/>
+<VBox spacing="10" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.QuizController">
+	<children>
+	    <Label fx:id="questionText" wrapText="true"/>
+	    <VBox spacing="10" alignment="TOP_LEFT">
+	    	<children>
+	            <RadioButton fx:id="option1" toggleGroup="$toggleGroup"/>
+		        <RadioButton fx:id="option2" toggleGroup="$toggleGroup"/>
+		        <RadioButton fx:id="option3" toggleGroup="$toggleGroup"/>
+		        <RadioButton fx:id="option4" toggleGroup="$toggleGroup"/>
+	    	</children>
+	    </VBox>
+	    <HBox spacing="10">
+	    	<children>
+			    <Button text="Domanda Precedente" onAction="#handlePrevious"/>
+			    <Button text="Prossima Domanda" onAction="#handleSubmit"/>
+			    <Button text="Esci" fx:id="finishButton" onAction="#handleBackToHomepage"/>
+			</children>
+	    </HBox>
+	    <Label fx:id="scoreLabel" text="Punteggio: 0"/>
+	    <Label fx:id="timerLabel" text="Tempo: 00:00"/>
+   </children>
+   <padding>
+      <Insets top="10" right="10" bottom="10" left="10"/>
+   </padding>
 </VBox>

@@ -2,6 +2,8 @@ package com.play.controller;
 
 import com.play.model.User;
 import com.play.util.FileHandler;
+import com.play.util.UserSession;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,11 +38,16 @@ public class LoginController {
 
     try {
       List<User> users = FileHandler.readUsers();
-      boolean userFound = users.stream().anyMatch(user -> user.getUsername().equals(username) && user.getPassword().equals(password));
+      User loggedInUser = users.stream().filter(user -> user.getUsername().equals(username) && user.getPassword().equals(password)).findFirst().orElse(null);
 
-      if (userFound) {
+      if (loggedInUser != null) {
+        UserSession session = UserSession.getInstance();
+        session.setUsername(loggedInUser.getUsername());
+        session.setFirstName(loggedInUser.getFirstName());
+        session.setLastName(loggedInUser.getLastName());
         Stage stage = (Stage) usernameField.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/com/play/view/homepage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/play/view/homepage.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/com/play/application.css").toExternalForm());
         stage.setScene(scene);

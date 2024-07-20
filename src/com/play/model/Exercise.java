@@ -3,12 +3,10 @@ package com.play.model;
 public class Exercise {
   private String id;
   private String description;
-  private String solution;
 
-  public Exercise(String id, String description, String solution) {
+  public Exercise(String id, String description) {
     this.id = id;
     this.description = description;
-    this.solution = solution;
   }
 
   public String getId() {
@@ -17,9 +15,5 @@ public class Exercise {
 
   public String getDescription() {
     return description;
-  }
-
-  public String getSolution() {
-    return solution;
   }
 }
