@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.LeaderboardController">
+    <top>
+        <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
+        	<Label text="Classifica" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
+        </VBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="20" maxWidth="1200" BorderPane.alignment="CENTER">
+	        <VBox alignment="CENTER" spacing="20">
+	            <TableView fx:id="leaderboardTable" prefWidth="1010" maxWidth="1010" prefHeight="600" maxHeight="600">
+	                <columns>
+	                    <TableColumn fx:id="positionColumn" text="Posizione"/>
+	                    <TableColumn fx:id="usernameColumn" text="Username"/>
+	                    <TableColumn fx:id="scoreColumn" text="Punteggio"/>
+	                </columns>
+	            </TableView>
+	        </VBox>
+	        <VBox alignment="CENTER" spacing="10">
+	    		<Label fx:id="currentUserLabel" style="-fx-font-size: 20px;"/>
+	        </VBox>
+        </VBox>
+    </center>
+    <bottom>
+        <VBox alignment="CENTER" spacing="10">
+            <Button fx:id="backButton" text="Indietro" onAction="#handleBackToHomepage" prefWidth="150" 
+                    style="-fx-background-color: #E53935;"/>
+        </VBox>
+    </bottom>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+</BorderPane>

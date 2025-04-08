@@ -1,0 +1,59 @@
+Scrivi la condizione per verificare se un numero è maggiore di un altro.
+-----
+public boolean isGreater(int a, int b) {
+  return _____;
+}
+-----
+a > b
+
+Scrivi la condizione per ritornare se il numero inserito è pari seguendo la logica del metodo seguente.
+-----
+public boolean isEven(int number) {
+  return _______________;
+}
+-----
+number % 2 == 0
+
+Completa il seguente metodo facendo in modo che, prendendo in input un array di numeri interi, ritorni la somma dei suoi elementi.
+-----
+public int sumArray(int[] numbers) {
+  int sum = 0;
+  for (int num : numbers) {
+    ___________
+  }
+  return sum;
+}
+-----
+sum += num;
+
+Completa il seguente metodo per convertire la stringa in input in minuscolo.
+-----
+public String convertString(String s) {
+  return _______________;
+}
+-----
+s.toLowerCase()
+
+Completa il seguente metodo per controllare se una stringa è vuota.
+-----
+public boolean isEmpty(String s) {
+  return ___________
+}
+-----
+s.isEmpty();
+
+Completa il metodo per convertire una stringa in maiuscolo.
+-----
+public String convertToUpper(String s) {
+  return _______________
+}
+-----
+s.toUpperCase();
+
+Completa il seguente metodo per ritornare il minimo tra due numeri interi.
+-----
+public int min(int a, int b) {
+  return ______________;
+}
+-----
+Math.min(a, b)

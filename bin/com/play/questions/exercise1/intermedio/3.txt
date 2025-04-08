@@ -1,0 +1,134 @@
+Quale sarà l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String s = "Hello";
+    s.concat(" World");
+    System.out.println(s);
+  }
+}
+-----
+Hello World
+Hello
+ World
+HelloHello
+Hello
+
+Cosa stampa il seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    int result = 1;
+    for (int i = 1; i <= 5; i++) {
+      result *= i;
+    }
+    System.out.println(result);
+  }
+}
+-----
+prodotto dei numeri da 1 a 4 compresi
+prodotto dei numeri da 2 a 4 compresi
+prodotto dei numeri da 1 a 5 compresi
+prodotto dei numeri da 2 a 5 compresi
+prodotto dei numeri da 1 a 5 compresi
+
+Cosa ritorna il seguente codice?
+-----
+public class Main {
+  public int findValue(int[] numbers) {
+    int value = numbers[0];
+    for (int num : numbers) {
+      if (num > value) {
+        value = num;
+      }
+    }
+    return value;
+  }
+}
+-----
+media
+numero in posizione 0
+numeri maggiori del numero in posizione 0
+massimo
+massimo
+
+Cosa stamperà il seguente codice Java?
+-----
+public class Main {
+  public static void main(String[] args) {
+    int[] numbers = {3, 7, 1, 9, 5};
+    int sum = 0;
+    for (int i = 0; i < numbers.length; i++) {
+      if (numbers[i] == 9) {
+        break;
+      }
+      sum += numbers[i];
+    }
+    System.out.println(sum);
+  }
+}
+-----
+20
+25
+11
+10
+11
+
+Cosa ritorna il seguente codice?
+-----
+public class Main {
+  public String nuovaStringa(String s) {
+    String nuova = "";
+    for (int i = s.length() - 1; i >= 0; i--) {
+      nuova += s.charAt(i);
+    }
+    return nuova;
+  }
+}
+-----
+la stessa stringa
+la stringa scritta al contrario
+un array di stringhe avente come elementi le lettere della stringa
+un array di stringhe avente come elementi le lettere in ordine opposto della stringa
+la stringa scritta al contrario
+
+Quale metodo della classe "String" bisogna usare per confrontare le due stringhe ignorando la differenza tra maiuscole e minuscole così che venga stampato true?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String s1 = "hEllO";
+    String s2 = "HeLLo";
+    System.out.println(s1.__________(s2));
+  }
+}
+-----
+isTheSame()
+equals()
+equalsIgnoreCase()
+equalsIgnore()
+equalsIgnoreCase()
+
+Quale sarà l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    int x = 5;
+    int y = 10;
+    int z = 20;
+    int result = addNumbers(x, y);
+    result = subtractNumbers(result, z);
+    System.out.println(result);
+  }
+  public static int addNumbers(int x, int y) {
+    return x + y;
+  }
+  public static int subtractNumbers(int x, int y) {
+    return x - y;
+  }
+}
+-----
+10
+-5
+5
+15
+-5

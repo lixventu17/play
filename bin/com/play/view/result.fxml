@@ -1,12 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.ResultController" alignment="CENTER" spacing="10">
-    <Label fx:id="resultText"/>
-    <Button fx:id="nextLevelButton" text="Livello successivo" onAction="#handleNextLevel"/>
-    <Button fx:id="retryButton" text="Riprova" onAction="#handleRetryLevel"/>
-    <Button text="Homepage" onAction="#handleBackToHomepage"/>
-</VBox>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.ResultController">
+    <top>
+        <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
+            <Label fx:id="resultTitle" text="Risultato" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
+        </VBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="30">
+            <!-- Sezione Dati -->
+            <VBox alignment="CENTER" spacing="10">
+                <Label fx:id="resultScore" text="Punteggio ottenuto" style="-fx-font-size: 18px;"/>
+                <Label fx:id="resultTime" text="Tempo impiegato" style="-fx-font-size: 18px;"/>
+            </VBox>
+            <!-- Sezione Pulsanti -->
+            <VBox alignment="CENTER" spacing="20">
+                <Label fx:id="nextText" text="Prossimo" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    			<Button fx:id="retryButton" text="Riprova" onAction="#handleRetryLevel" prefWidth="150"
+                		style="-fx-background-color: #FAB228;"/>
+    			<Button fx:id="nextLevelButton" text="Vai" onAction="#handleNextLevel" prefWidth="150"
+                		style="-fx-background-color: #7DC243;"/>
+                <Label fx:id="medalText" text="Badge" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <ImageView fx:id="imageMedal" preserveRatio="true"/>
+            </VBox>
+        </VBox>
+    </center>
+    <bottom>
+        <VBox spacing="20" alignment="CENTER" BorderPane.alignment="CENTER">
+            <HBox spacing="20" alignment="CENTER">
+                <Button fx:id="emailSummaryButton" text=" Recap via Email" onAction="#sendEmailSummary" prefWidth="250"
+                        style="-fx-background-color: #000000;">
+                    <graphic>
+                        <ImageView fx:id="imageGmail" fitWidth="20" fitHeight="20" preserveRatio="true"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="telegramSummaryButton" text=" Recap via Telegram" onAction="#sendTelegramSummary" prefWidth="250"
+                        style="-fx-background-color: #000000;">
+                    <graphic>
+                        <ImageView fx:id="imageTelegram" fitWidth="20" fitHeight="20" preserveRatio="true"/>
+                    </graphic>
+                </Button>
+            </HBox>
+            <Region prefHeight="20"/>
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="backToProgressButton" text="Indietro" onAction="#handleBackToProgress" prefWidth="150"
+                		style="-fx-background-color: #E53935;"/>
+            </HBox>
+        </VBox>
+    </bottom>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+</BorderPane>

@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
-<?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.ExerciseDetailsController" alignment="CENTER" spacing="20.0">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.ExerciseDetailsController">
+    <!-- Header: Titolo in alto -->
+    <top>
+        <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
+            <Label fx:id="exerciseTitle" text="Titolo dell'esercizio" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
+        </VBox>
+    </top>
+    
+    <!-- Corpo: Descrizione e Istruzioni -->
+    <center>
+        <VBox alignment="CENTER" spacing="30" maxWidth="700">
+            <!-- Sezione Descrizione -->
+            <VBox alignment="CENTER_LEFT" spacing="10">
+                <Label fx:id="descriptionHeader" text="Descrizione" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label fx:id="exerciseDescription" text="Testo descrizione" wrapText="true" maxWidth="700"/>
+            </VBox>
+            <!-- Sezione Istruzioni -->
+            <VBox alignment="CENTER_LEFT" spacing="10">
+                <Label fx:id="instructionsHeader" text="Istruzioni" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label fx:id="exerciseInstructions" text="Testo istruzioni" wrapText="true" maxWidth="700"/>
+            </VBox>
+        </VBox>
+    </center>
+    
+    <!-- Footer: Difficoltà, ComboBox (opzionale) e pulsanti -->
+    <bottom>
+        <VBox alignment="CENTER" spacing="20" BorderPane.alignment="CENTER">
+            <Label fx:id="difficultyLabel" text="Difficoltà:" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <ComboBox fx:id="levelComboBox" visible="false" prefWidth="150"/>
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Indietro" onAction="#handleBack" prefWidth="150"
+                        style="-fx-background-color: #E53935;"/>
+                <Button fx:id="startExerciseButton" text="Inizia" onAction="#handleStartExercise" prefWidth="150"
+                        style="-fx-background-color: #039BE5;"/>
+            </HBox>
+        </VBox>
+    </bottom>
+    
     <padding>
-        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+        <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
-    <Text fx:id="exerciseTitle" text="Dettagli dell'esercizio" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-    <Text fx:id="exerciseDescription" text="Descrizione dell'esercizio" wrappingWidth="300"/>
-    <Text fx:id="difficultyText" text="Difficoltà"/>
-    <ComboBox fx:id="difficultyComboBox" onAction="#handleDifficultySelection"/>
-    <HBox spacing="10.0" alignment="CENTER">
-        <Button text="Torna all'Homepage" onAction="#handleBackToHomepage"/>
-        <Button fx:id="startExerciseButton" text="Inizia Esercizio" onAction="#handleStartExercise"/>
-    </HBox>
-</VBox>
+</BorderPane>

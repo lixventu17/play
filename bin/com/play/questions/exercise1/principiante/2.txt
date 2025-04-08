@@ -1,0 +1,48 @@
+Quale operatore viene utilizzato per l'operazione di incremento?
+++
++=
+--
++
+++
+
+Quale operatore viene utilizzato per l'operazione logica AND?
+||
+&
+and
+&&
+&&
+
+Quale metodo viene utilizzato per avviare l'esecuzione di un programma?
+start()
+main()
+run()
+execute()
+main()
+
+Quale metodo viene utilizzato per confrontare due stringhe?
+compare()
+equals()
+match()
+==
+equals()
+
+Quale operatore viene utilizzato per l'operazione logica OR?
+&&
+||
+|
+or
+||
+
+Quale ciclo viene utilizzato per iterare un numero specifico di volte?
+while
+do-while
+for
+foreach
+for
+
+Quale operatore viene utilizzato per la negazione logica?
+!
+not
+~
+^
+!

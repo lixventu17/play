@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.ProfileController">
+    <!-- Header: titolo in alto -->
+    <top>
+        <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
+            <Label text="Profilo Utente" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
+        </VBox>
+    </top>
+    
+    <!-- Center: immagine e form -->
+    <center>
+        <VBox alignment="CENTER" spacing="30" maxWidth="500">
+            <!-- Sezione immagine -->
+            <VBox alignment="CENTER" spacing="10">
+                <ImageView fx:id="profileImageView" fitWidth="150" fitHeight="150" preserveRatio="true"/>
+                <Button fx:id="chooseImageButton" text="Scegli immagine" onAction="#handleChooseImage"
+                        style="-fx-background-color: #f1982e; -fx-font-size: 14px; -fx-padding: 5 10;"/>
+            </VBox>
+            
+            <!-- Sezione form in GridPane -->
+            <GridPane hgap="10" vgap="10" alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" prefWidth="180"/>
+                    <ColumnConstraints halignment="LEFT" prefWidth="300"/>
+                </columnConstraints>
+                <Label text="Username:" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="usernameField" GridPane.rowIndex="0" GridPane.columnIndex="1" editable="false"/>
+                
+                <Label text="Nome:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="firstNameField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                
+                <Label text="Cognome:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="lastNameField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                
+                <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="emailField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                
+                <Label text="Telefono:" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="phoneField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                
+                <Label text="Invio automatico:" GridPane.rowIndex="5" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <CheckBox fx:id="autoSendCheckBox" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            </GridPane>
+            
+            <!-- Spacer tra il form e i pulsanti -->
+            <Region prefHeight="20"/>
+            
+            <!-- Pulsanti in una riga -->
+            <HBox alignment="CENTER" spacing="20">
+                <Button text="Indietro" onAction="#handleBackToHomepage" prefWidth="150"
+                        style="-fx-background-color: #E53935;"/>
+                <Button fx:id="saveButton" text="Salva" onAction="#handleSave" prefWidth="150"
+                        style="-fx-background-color: #039BE5;"/>
+            </HBox>
+            
+            <!-- Label di stato -->
+            <Label fx:id="statusLabel" style="-fx-font-size: 16px;"/>
+        </VBox>
+    </center>
+    
+    <!-- Padding globale per l'intera pagina -->
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+</BorderPane>

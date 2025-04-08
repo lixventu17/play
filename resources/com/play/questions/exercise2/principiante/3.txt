@@ -1,0 +1,55 @@
+Completa il seguente metodo per confrontare due stringhe ignorando il case.
+-----
+public boolean compareIgnoreCase(String s1, String s2) {
+  return s1._____________________
+}
+-----
+equalsIgnoreCase(s2);
+
+Completa il seguente metodo per concatenare due stringhe.
+-----
+public String concatenate(String s1, String s2) {
+  return ________
+}
+-----
+s1 + s2;
+
+Scrivi la condizione per controllare se una stringa termina con una determinata sottostringa.
+-----
+public boolean endsWith(String str, String suffix) {
+  return _____________________
+}
+-----
+str.endsWith(suffix);
+
+Completa il metodo per rimuovere gli spazi bianchi da una stringa usando replace.
+-----
+public String removeSpaces(String s) {
+  return __________________;
+}
+-----
+s.replace(" ", "")
+
+Scrivi la condizione per verificare se una stringa contiene un'altra stringa.
+-----
+public boolean containsSubstring(String str, String substr) {
+  return _____________________
+}
+-----
+str.contains(substr);
+
+Completa il seguente metodo per invertire una stringa.
+-----
+public String reverseString(String s) {
+  return new StringBuilder(s)._________.toString();
+}
+-----
+reverse()
+
+Completa il metodo per ottenere il valore assoluto di una variabile double.
+-----
+public double absoluteValue(double number) {
+  return ________________;
+}
+-----
+Math.abs(number)

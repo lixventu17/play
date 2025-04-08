@@ -1,0 +1,60 @@
+Completa il seguente codice per stampare la lunghezza dell'array di interi.
+-----
+public static void main(String[] args) {
+  int[] numbers = {1, 2, 3, 4, 5};
+  System.out.println(______________);
+}
+-----
+numbers.length
+
+Completa il metodo affinché calcoli il prodotto degli elementi di un array di interi.
+-----
+public int productArray(int[] arr) {
+  int product = 1;
+  for (int num : arr) {
+    _______________
+  }
+  return product;
+}
+-----
+product *= num;
+
+Scrivi la condizione per controllare se una lista è vuota.
+-----
+public boolean isListEmpty(List<String> list) {
+  return ______________;
+}
+-----
+list.isEmpty()
+
+Scrivi la funzione da usare per rimuovere tutti i caratteri non alfabetici da una stringa.
+-----
+public String removeNonAlphabetic(String s) {
+  return s.__________("[^a-zA-Z]", "");
+}
+-----
+replaceAll
+
+Scrivi la condizione per controllare se una stringa inizia con una determinata sottostringa.
+-----
+public boolean startsWith(String str, String prefix) {
+  return _______________________
+}
+-----
+str.startsWith(prefix);
+
+Completa il metodo per trovare l'indice di un elemento in una lista.
+-----
+public int findIndex(List<String> list, String element) {
+  return list.________________;
+}
+-----
+indexOf(element)
+
+Completa il seguente metodo per ottenere la radice quadrata di un numero.
+-----
+public double squareRoot(double number) {
+  return __________________
+}
+-----
+Math.sqrt(number);

@@ -17,7 +17,7 @@ public class Main extends Application {
     scene.getStylesheets().add(getClass().getResource("/com/play/application.css").toExternalForm());
     primaryStage.setTitle("PLAY");
     primaryStage.setScene(scene);
-    // primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/icon.png")));
+    primaryStage.setMaximized(true);
     primaryStage.show();
   }
 

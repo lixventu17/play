@@ -1,0 +1,48 @@
+Quale parola chiave viene utilizzata per dichiarare una classe?
+new
+class
+method
+object
+class
+
+Quale parola chiave viene usata per creare una costante?
+constant
+final
+static
+const
+final
+
+Quale metodo viene utilizzato per ottenere la lunghezza di una stringa?
+size()
+length()
+count()
+length
+length()
+
+Quale parola chiave viene utilizzata per dichiarare una classe astratta in Java?
+final
+abstract
+interface
+extends
+abstract
+
+Quale metodo viene utilizzato per ottenere la lunghezza di un array?
+size()
+length()
+count()
+length
+length
+
+Quale parola chiave viene usata per creare una nuova istanza di una classe?
+class
+new
+create
+object
+new
+
+Qual è la funzione dell'espressione "\n"?
+Spostare il testo nella riga successiva
+Rimuovere lo stile del testo
+
+
+Spostare il testo nella riga successiva

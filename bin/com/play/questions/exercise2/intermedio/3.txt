@@ -1,0 +1,82 @@
+Completa il metodo per trovare l'indice dell'ultima occorrenza di un carattere in una stringa.
+-----
+public int ultimoIndice(String s, char c) {
+  ________________________
+}
+-----
+return s.lastIndexOf(c);
+
+Scrivi la condizione per verificare se una stringa è palindroma.
+-----
+public boolean isPalindrome(String s) {
+  return s.equals(____________________.reverse().toString());
+}
+-----
+new StringBuilder(s)
+
+Completa il metodo per verificare se due stringhe sono anagrammi usando il metodo della classe Arrays.
+-----
+public boolean areAnagrams(String s1, String s2) {
+  char[] arr1 = s1.toCharArray();
+  char[] arr2 = s2.toCharArray();
+  Arrays.sort(arr1);
+  Arrays.sort(arr2);
+  _________________________________
+}
+-----
+return Arrays.equals(arr1, arr2);
+
+Completa il seguente metodo per controllare se due array di interi sono uguali elemento per elemento.
+-----
+public boolean arraysEqual(int[] a, int[] b) {
+  if(a.length != b.length) return false;
+  for (int i = 0; i < a.length; i++) {
+    if(____________) {
+      return false;
+    }
+  }
+  return true;
+}
+-----
+a[i] != b[i]
+
+Completa il metodo per verificare se un array contiene una sottosequenza in ordine.
+-----
+public boolean containsSubsequence(int[] arr, int[] sub) {
+  int j = 0;
+  for (int i = 0; i < arr.length && j < sub.length; i++) {
+    if (arr[i] == sub[j]) {
+      j++;
+    }
+  }
+  _______________________
+}
+-----
+return j == sub.length;
+
+Completa il seguente metodo per estrarre il dominio da un indirizzo email (cioè la parte dopo il carattere '@').
+-----
+public String extractDomain(String email) {
+  int atIndex = email.indexOf("@");
+  if (atIndex != -1) {
+    return email.______________________;
+  }
+  return "";
+}
+-----
+substring(atIndex + 1)
+
+Completa il metodo per contare il numero di vocali presenti in una stringa.
+-----
+public int countVowels(String s) {
+  int count = 0;
+  for (int i = 0; i < s.length(); i++) {
+    char c = Character.toLowerCase(s.charAt(i));
+    if (________________________________________________________) {
+      count++;
+    }
+  }
+  return count;
+}
+-----
+c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u'

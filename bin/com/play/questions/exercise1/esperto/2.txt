@@ -1,0 +1,142 @@
+Qual è l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    int[] arr = {1, 2, 3, 4, 5};
+    for (int i = 0; i < arr.length; i++) {
+      if (i % 2 == 0) {
+        System.out.print(arr[i]);
+        if (i != arr.length-1) {
+          System.out.print(" ");
+        }
+      }
+    }
+  }
+}
+-----
+1 3 5
+2 4
+135
+24
+1 3 5
+
+Quale metodo viene utilizzato per ordinare una lista?
+-----
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+public class Main {
+  public static void main(String[] args) {
+    List<Integer> numbers = new ArrayList<>();
+    numbers.add(3);
+    numbers.add(1);
+    numbers.add(4);
+    numbers.add(2);
+    // Ordina la lista qui
+    Collections._____(numbers);
+    System.out.println(numbers);
+  }
+}
+-----
+order
+arrange
+sort
+organize
+sort
+
+Qual è la funzionalità del metodo trim nella classe "String"?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String str = "  Hello, World!  ";
+    String trimmedStr = str.trim();
+    System.out.println(trimmedStr);
+  }
+}
+-----
+Rimuove gli spazi bianchi all'inizio della stringa
+Rimuove gli spazi bianchi alla fine della stringa
+Rimuove gli spazi bianchi all'inizio e alla fine della stringa
+Rimuove tutti gli spazi bianchi nella stringa
+Rimuove gli spazi bianchi all'inizio e alla fine della stringa
+
+Quale metodo della classe ArrayList mi restituisce l'elemento in posizione 1?
+-----
+import java.util.*;
+public class Main {
+  public static void main(String[] args) {
+    List<String> list = new ArrayList<>();
+    list.add("A");
+    list.add("B");
+    list.add("C");
+    // Ottieni l'elemento alla posizione 1
+    System.out.println(list._______(1));
+  }
+}
+-----
+return
+get
+obtain
+fetch
+get
+
+Qual è l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String str = "Hello, World!";
+    String[] parts = str.split(", ");
+    for (String part : parts) {
+      System.out.println(part);
+    }
+  }
+}
+-----
+Hello\nWorld!
+HelloWorld!
+
+
+Hello\nWorld!
+
+Quale metodo viene utilizzato per verificare se una lista contiene un determinato elemento?
+-----
+import java.util.*;
+public class Main {
+  public static void main(String[] args) {
+    List<String> list = new ArrayList<>();
+    list.add("apple");
+    list.add("banana");
+    list.add("cherry");
+    // Verifica se la lista contiene "banana"
+    if (list._______("banana")) {
+      System.out.println("La lista contiene banana.");
+    }
+  }
+}
+-----
+contains
+has
+includes
+find
+contains
+
+Quale metodo viene utilizzato per ottenere una porzione di una lista?
+-----
+import java.util.*;
+public class Main {
+  public static void main(String[] args) {
+    List<String> list = new ArrayList<>();
+    list.add("A");
+    list.add("B");
+    list.add("C");
+    // Ottieni la porzione della lista dalla posizione 1 alla 2
+    List<String> part = list._______(1, 3);
+    System.out.println(part);
+  }
+}
+-----
+sublist
+portion
+extract
+slice
+sublist

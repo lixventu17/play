@@ -1,0 +1,63 @@
+Completa il seguente metodo per creare una lista da un array usando Arrays.
+-----
+public List<String> arrayToList(String[] arr) {
+  return Arrays.____________
+}
+-----
+asList(arr);
+
+Completa il seguente metodo per ordinare un array di interi in ordine crescente.
+-----
+public void orderArray(int[] arr) {
+  Arrays._________;
+}
+-----
+sort(arr)
+
+Completa il metodo per rimuovere un elemento da una lista di stringhe.
+-----
+public void cancelElement(List<String> list, String element) {
+  _____________________
+}
+-----
+list.remove(element);
+
+Completa il metodo per convertire una lista di stringhe in una singola stringa separata da virgole.
+-----
+public String joinString(List<String> list) {
+  return String.join(___, list);
+}
+-----
+","
+
+Completa il seguente metodo per invertire una lista di interi usando la classe Collections.
+-----
+public void reverseList(List<Integer> list) {
+  Collections.______________
+}
+-----
+reverse(list);
+
+Completa il seguente metodo per concatenare due stringhe usando StringBuilder.
+-----
+public String concatStrings(String a, String b) {
+  StringBuilder sb = new StringBuilder();
+  sb.______(a);
+  sb.______(b);
+  return sb.toString();
+}
+-----
+append
+
+Completa il seguente metodo per controllare se una List<Integer> è ordinata in ordine crescente.
+-----
+public boolean isListSorted(List<Integer> list) {
+  for (int i = 1; i < list.size(); i++) {
+    if (_____________________________) {
+      return false;
+    }
+  }
+  return true;
+}
+-----
+list.get(i) < list.get(i - 1)

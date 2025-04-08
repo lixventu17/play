@@ -1,0 +1,67 @@
+Completa il metodo per ottenere il valore massimo da una lista di interi.
+-----
+public int maxList(List<Integer> list) {
+  return Collections.__________
+}
+-----
+max(list);
+
+Completa il seguente metodo usando l’operatore ternario per restituire il massimo tra due numeri (separando i segni con uno spazio vuoto).
+-----
+public int max(int a, int b) {
+  return a _ b _ a _ b;
+}
+-----
+> ? :
+
+Scrivi la condizione per verificare se un array è ordinato in ordine crescente.
+-----
+public boolean isSorted(int[] arr) {
+  for (int i = 1; i < arr.length; i++) {
+    if (___________________) {
+      return false;
+    }
+  }
+  return true;
+}
+-----
+arr[i] < arr[i - 1]
+
+Stampa il carattere 2.
+-----
+public static void main(String[] args) {
+  int num = 12345;
+  String str = String.valueOf(num);
+  __________________________________
+}
+-----
+System.out.println(str.charAt(1));
+
+Scrivi la condizione per verificare se una stringa è una sequenza di cifre.
+-----
+public boolean isNumeric(String s) {
+  return s._______("\\d+");
+}
+-----
+matches
+
+Completa il metodo per calcolare il fattoriale di un numero in modo ricorsivo.
+-----
+public int factorial(int n) {
+  if (n <= 1) {
+    return 1;
+  }
+  else {
+    return n * _________________
+  }
+}
+-----
+factorial(n - 1);
+
+Completa il seguente metodo per convertire una stringa in un intero.
+-----
+public int convertStringToInt(String s) {
+  return ____________________
+}
+-----
+Integer.parseInt(s);

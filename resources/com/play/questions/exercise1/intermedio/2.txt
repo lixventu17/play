@@ -1,0 +1,120 @@
+Qual è l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String str1 = "Java";
+    String str2 = "Programming";
+    String result = str1 + str2;
+    System.out.println(result);
+  }
+}
+-----
+ProgrammingJava
+JavaProgramming
+JParvoagramming
+Java Programming
+JavaProgramming
+
+Quale è l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    int x = 5;
+    int y = 10;
+    System.out.println(x > y ? "x is greater" : "y is greater");
+  }
+}
+-----
+x is greater
+y is greater
+true
+false
+y is greater
+
+Quale sarà l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String s1 = "Hello";
+    String s2 = new String("Hello");
+    String s3 = "Hello";
+    boolean result1 = (s1 == s2);
+    boolean result2 = (s1 == s3);
+    boolean result3 = s1.equals(s2);
+    System.out.println(result1 + " " + result2 + " " + result3);
+  }
+}
+-----
+true true false
+false true true
+false false true
+true false true
+false true true
+
+Quale è l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    int[] array = {1, 2, 3, 4, 5};
+    int sum = 0;
+    for (int i = 0; i < array.length; i++) {
+      if (array[i] % 2 == 0) {
+        continue;
+      }
+      sum += array[i];
+    }
+    System.out.println(sum);
+  }
+}
+-----
+6
+9
+12
+15
+9
+
+Cosa stampa il seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String text = "Java Programming";
+    System.out.println(text.indexOf("Pro"));
+  }
+}
+-----
+5
+4
+
+
+5
+
+Qual è l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String str = "abcdef";
+    System.out.println(str.substring(2, 5));
+  }
+}
+-----
+bcd
+bcde
+cde
+cdef
+cde
+
+Quale sarà l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+    numbers.replaceAll(n -> n * 2);
+    System.out.println(numbers);
+  }
+}
+-----
+2, 2, 6, 4, 10
+1, 4, 3, 8, 5
+2, 4, 6, 8, 10
+[2, 4, 6, 8, 10]
+[2, 4, 6, 8, 10]

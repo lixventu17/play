@@ -1,0 +1,68 @@
+Completa il metodo per controllare se un array è ordinato in ordine decrescente.
+-----
+public boolean isSortedDescending(int[] arr) {
+  for (int i = 1; i < arr.length; i++) {
+    if (___________________) {
+      return false;
+    }
+  }
+  return true;
+}
+-----
+arr[i] > arr[i - 1]
+
+Scrivi la condizione per verificare se una stringa contiene solo numeri.
+-----
+public boolean isNumeric(String s) {
+  _________________________
+}
+-----
+return s.matches("\\d+");
+
+Completa il metodo per convertire un array di numeri interi in una stringa.
+-----
+public String arrayToString(int[] arr) {
+  return _____________________
+}
+-----
+Arrays.toString(arr);
+
+Completa il metodo per rimuovere tutte le vocali da una stringa.
+-----
+public String removeVowels(String s) {
+  return s.______________________________;
+}
+-----
+replaceAll("[aeiouAEIOU]", "")
+
+Completa il seguente metodo per convertire un array di interi in un ArrayList di interi.
+-----
+public ArrayList<Integer> arrayToList(int[] arr) {
+  ArrayList<Integer> list = new ArrayList<>();
+  for (int num : arr) {
+    ______________
+  }
+  return list;
+}
+-----
+list.add(num);
+
+Completa il metodo per invertire un array di numeri interi.
+-----
+public int[] reverseArray(int[] arr) {
+  int[] reversed = new int[arr.length];
+  for (int i = 0; i < arr.length; i++) {
+    reversed[i] = _______________________;
+  }
+  return reversed;
+}
+-----
+arr[arr.length - 1 - i]
+
+Scrivi la condizione per verificare se una stringa è composta solo da caratteri alfabetici.
+-----
+public boolean isAlphabetic(String s) {
+  ______________________________
+}
+-----
+return s.matches("[a-zA-Z]+");

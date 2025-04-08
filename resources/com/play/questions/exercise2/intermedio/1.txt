@@ -1,0 +1,65 @@
+Completa il seguente metodo per contare quante volte compare un carattere in una stringa.
+-----
+public int countChar(String s, char c) {
+  int count = 0;
+  for (int i = 0; i < s.length(); i++) {
+    if (___________ == c) {
+      count++;
+    }
+  }
+  return count;
+}
+-----
+s.charAt(i)
+
+Completa il seguente metodo per convertire un intero in una stringa.
+-----
+public String convertToString(int number) {
+  return _______________________
+}
+-----
+String.valueOf(number);
+
+Completa il metodo per verificare se una stringa è nulla o vuota.
+-----
+public boolean isNullOrEmpty(String s) {
+  return ________________________;
+}
+-----
+s == null || s.isEmpty()
+
+Completa il metodo per ritornare la parte iniziale di una stringa fino a una certa lunghezza.
+-----
+public String partOfString(String s, int length) {
+  return _______________________
+}
+-----
+s.substring(0, length);
+
+Completa il metodo per calcolare la potenza di un numero.
+-----
+public double pow(double base, double exponent) {
+  return _________________________
+}
+-----
+Math.pow(base, exponent);
+
+Completa il seguente metodo per dividere una stringa in base allo spazio.
+-----
+public String[] divideString(String s) {
+  return s._____(" ");
+}
+-----
+split
+
+Completa il metodo per calcolare la media degli elementi di un array di numeri interi.
+-----
+public double average(int[] arr) {
+  int sum = 0;
+  for (int num : arr) {
+    sum += num;
+  }
+  return _________________________;
+}
+-----
+(double) sum / arr.length

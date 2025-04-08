@@ -1,0 +1,108 @@
+Quale è l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello, World!");
+  }
+}
+-----
+Hello, World!
+Hello World
+
+
+Hello, World!
+
+Quale è l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String s = "hellO";
+    System.out.println(s.toUpperCase());
+  }
+}
+-----
+HELLO
+hello
+Hello
+hellO
+HELLO
+
+Quale sarà l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    int[] numbers = {1, 2, 3, 4, 5};
+    System.out.println(numbers[2]);
+  }
+}
+-----
+2
+3
+
+
+3
+
+Quale è l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String s = "Java";
+    System.out.println(s.charAt(2));
+  }
+}
+-----
+a
+v
+
+
+v
+
+Cosa stampa il seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String str = "Hello, World!";
+    System.out.println(str.length());
+  }
+}
+-----
+11
+12
+13
+14
+13
+
+Quale è l'output del seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 3; i++) {
+      System.out.print(i);
+    }
+  }
+}
+-----
+123
+012
+0123
+345
+012
+
+Cosa stampa il seguente codice?
+-----
+public class Main {
+  public static void main(String[] args) {
+    int a = 10;
+    int b = 20;
+    int temp = a;
+    a = b;
+    b = temp;
+    System.out.println(a + ", " + b);
+  }
+}
+-----
+10, 20
+20, 10
+
+
+20, 10

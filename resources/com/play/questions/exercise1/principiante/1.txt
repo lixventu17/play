@@ -1,0 +1,48 @@
+Quale operatore viene usato per l'assegnazione di valori alle variabili?
+=
+==
+:=
+=>
+=
+
+Quale è il tipo di dato per un numero intero?
+int
+float
+char
+boolean
+int
+
+Quale tipo di dato viene utilizzato per memorizzare un singolo carattere?
+character
+String
+char
+text
+char
+
+Come si dichiara una variabile stringa?
+String s;
+string s;
+str s;
+text s;
+String s;
+
+Quale simbolo viene usato per i commenti su una sola linea?
+//
+/*
+<!--
+##
+//
+
+Quale tipo di dato viene utilizzato per valori veri/falsi?
+bool
+boolean
+truefalse
+binary
+boolean
+
+Quale è il tipo di dato per un numero decimale?
+int
+double
+char
+byte
+double

@@ -2,6 +2,8 @@ module PLAY {
 	requires transitive javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.mail;
+    requires activation;
 
     opens com.play to javafx.fxml;
     opens com.play.controller to javafx.fxml;

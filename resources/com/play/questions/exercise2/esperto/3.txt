@@ -1,0 +1,83 @@
+Completa il seguente metodo per contare la frequenza delle parole in un array di stringhe.
+-----
+public Map<String, Integer> countWords(String[] words) {
+  Map<String, Integer> freq = new HashMap<>();
+  for (String word : words) {
+    ________(word, freq.getOrDefault(word, 0) + 1);
+  }
+  return freq;
+}
+-----
+freq.put
+
+Completa il seguente metodo per eseguire la divisione di due numeri e gestire l'eccezione di divisione per zero.
+-----
+public int safeDivide(int a, int b) {
+  try {
+    return a / b;
+  } catch (___________________ e) {
+    return 0;
+  }
+}
+-----
+ArithmeticException
+
+Completa il seguente metodo per formattare un LocalDateTime nel formato "dd/MM/yyyy HH:mm:ss".
+-----
+public String formatDate(LocalDateTime date) {
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+  return _______________________
+}
+-----
+date.format(formatter);
+
+Completa il seguente metodo per leggere il contenuto di un file e restituirlo come stringa.
+-----
+public String readFile(String path) throws IOException {
+  StringBuilder content = new StringBuilder();
+  try (______________ br = new ______________(new FileReader(path))) {
+    String line;
+    while ((line = br.readLine()) != null) {
+      content.append(line);
+      content.append(System.lineSeparator());
+    }
+  }
+  return content.toString();
+}
+-----
+BufferedReader
+
+Completa il seguente metodo per verificare se un oggetto è una Stringa.
+-----
+public boolean isString(Object obj) {
+  return obj __________ String;
+}
+-----
+instanceof
+
+Completa il metodo in modo da restituire il nome del giorno (dove 1 = "Lunedì", 2 = "Martedì", ecc.).
+-----
+public String getDayName(int day) {
+  ______(day) {
+    case 1: return "Lunedì";
+    case 2: return "Martedì";
+    case 3: return "Mercoledì";
+    case 4: return "Giovedì";
+    case 5: return "Venerdì";
+    case 6: return "Sabato";
+    case 7: return "Domenica";
+    default: return "Giorno non valido";
+  }
+}
+-----
+switch
+
+Completa il seguente metodo in modo che lanci un'eccezione personalizzata se il numero passato è negativo.
+------
+public void checkPositive(int number) ______ IllegalArgumentException {
+  if (number < 0) {
+    throw new IllegalArgumentException("Numero negativo non consentito");
+  }
+}
+------
+throws

@@ -6,29 +6,68 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.LoginController" alignment="CENTER" spacing="20">
-    <padding><Insets top="50" right="50" bottom="50" left="50"/></padding>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.LoginController">
+    <!-- Header: titolo in alto -->
+    <top>
+        <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
+            <Label text="Crea Nuovo Utente" style="-fx-font-size: 30px; -fx-font-weight: bold;" />
+        </VBox>
+    </top>
     
-    <Label text="Crea Nuovo Utente" styleClass="header-label"/>
+    <!-- Body: form centrato -->
+    <center>
+        <VBox alignment="CENTER" spacing="20" maxWidth="500">
+            <!-- GridPane per i campi con due colonne fisse -->
+            <GridPane hgap="10" vgap="10" alignment="CENTER">
+                <columnConstraints>
+                    <!-- Colonna per le label: aumenta la larghezza per evitare tagli -->
+                    <ColumnConstraints halignment="CENTER" prefWidth="150"/>
+                    <!-- Colonna per i campi -->
+                    <ColumnConstraints halignment="CENTER" prefWidth="300"/>
+                </columnConstraints>
+                
+                <!-- Righe del form -->
+                <Label text="Username:" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="createUsernameField" promptText="Inserisci username" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                
+                <Label text="Password:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <PasswordField fx:id="createPasswordField" promptText="Inserisci password" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                
+                <Label text="Nome:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="firstNameField" promptText="Inserisci nome" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                
+                <Label text="Cognome:" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="lastNameField" promptText="Inserisci cognome" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                
+                <Label text="Email:" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="emailField" promptText="Inserisci email" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                
+                <Label text="Telefono:" GridPane.rowIndex="5" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="phoneField" promptText="Inserisci numero di telefono" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            </GridPane>
+            
+            <!-- Spacer fra il form e i pulsanti -->
+            <Region prefHeight="30"/>
+            
+            <!-- Sezione pulsanti -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="Annulla" onAction="#handleBack" prefWidth="150"
+                        style="-fx-background-color: #E53935;"/>
+                <Button text="Conferma" onAction="#handleCreateUserForm" prefWidth="150"
+                        style="-fx-background-color: #039BE5;"/>
+            </HBox>
+        </VBox>
+    </center>
     
-    <GridPane hgap="10" vgap="10" alignment="CENTER">
-        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
-        
-        <Label text="Username:" GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="CENTER_RIGHT"/>
-        <TextField fx:id="createUsernameField" promptText="Inserisci username" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-        
-        <Label text="Password:" GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER_RIGHT"/>
-        <PasswordField fx:id="createPasswordField" promptText="Inserisci password" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-        
-        <Label text="Nome:" GridPane.rowIndex="2" GridPane.columnIndex="0" alignment="CENTER_RIGHT"/>
-        <TextField fx:id="firstNameField" promptText="Inserisci nome" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-        
-        <Label text="Cognome:" GridPane.rowIndex="3" GridPane.columnIndex="0" alignment="CENTER_RIGHT"/>
-        <TextField fx:id="lastNameField" promptText="Inserisci cognome" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-        
-        <Button text="Salva" onAction="#handleCreateUserForm" GridPane.rowIndex="4" GridPane.columnSpan="2" alignment="CENTER"/>
-    </GridPane>
-</VBox>
+    <!-- Padding globale per l'intera pagina -->
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+</BorderPane>

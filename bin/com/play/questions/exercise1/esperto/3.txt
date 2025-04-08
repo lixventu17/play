@@ -1,0 +1,116 @@
+Qual è il ruolo della parola chiave this?
+-----
+public class Main {
+  private int value;
+  public Main(int value) {
+    this.value = value;
+  }
+}
+-----
+Si riferisce all'istanza corrente
+Si riferisce alla classe corrente
+Si riferisce al metodo corrente
+Si riferisce alla variabile corrente
+Si riferisce all'istanza corrente
+
+Quale parola chiave viene utilizzata per ereditare una classe?
+-----
+public class Animal {
+  // ...
+}
+public class Dog _______ Animal {
+  // ...
+}
+-----
+inherits
+extends
+implements
+derives
+extends
+
+Qual è il ruolo della parola chiave final nel seguente codice?
+-----
+public class Main {
+  public final void display() {
+    System.out.println("Hello");
+  }
+}
+-----
+Definisce una classe che non può essere ereditata
+Definisce una costante che può essere modificata
+Definisce un metodo che non può essere sovrascritto
+Definisce una variabile che può essere modificata
+Definisce un metodo che non può essere sovrascritto
+
+Quale metodo viene utilizzato per convertire una stringa in un intero?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String number = "123";
+    int result = Integer._______(number);
+    System.out.println(result);
+  }
+}
+-----
+convertToInt
+toInt
+convert
+parseInt
+parseInt
+
+Qual è il ruolo della parola chiave super?
+-----
+public class Animal {
+  public void makeSound() {
+    System.out.println("Animal sound");
+  }
+}
+public class Dog extends Animal {
+  public void makeSound() {
+    super.makeSound();
+    System.out.println("Dog barks");
+  }
+}
+-----
+Chiamare il costruttore della superclasse
+Chiamare un metodo della superclasse
+Dichiarare una variabile di superclasse
+Terminare l'esecuzione di un metodo
+Chiamare un metodo della superclasse
+
+Quale metodo della classe String viene utilizzato per convertire una stringa in un array di caratteri?
+-----
+public class Main {
+  public static void main(String[] args) {
+    String str = "Hello";
+    char[] chars = str._______();
+    for (char c : chars) {
+      System.out.print(c + " ");
+    }
+  }
+}
+-----
+toArray
+getChars
+charArray
+toCharArray
+toCharArray
+
+Quale metodo viene utilizzato per interrompere un ciclo for?
+-----
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 10; i++) {
+      if (i == 5) {
+        _______;
+      }
+      System.out.print(i + " ");
+    }
+  }
+}
+-----
+quit
+exit
+stop
+break
+break
