@@ -94,3 +94,13 @@
 .table-view .row-cell:selected {
     -fx-background-color: transparent;
 }
+
+/* Pulsante info accanto al campo Chat ID Telegram */
+#infoChatIdButton {
+    -fx-background-color: white;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-border-width: 1.2px;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}

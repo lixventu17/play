@@ -73,11 +73,11 @@ public String getDayName(int day) {
 switch
 
 Completa il seguente metodo in modo che lanci un'eccezione personalizzata se il numero passato è negativo.
-------
+-----
 public void checkPositive(int number) ______ IllegalArgumentException {
   if (number < 0) {
     throw new IllegalArgumentException("Numero negativo non consentito");
   }
 }
-------
+-----
 throws

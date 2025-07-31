@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.LoginController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.CreateUserController">
     <!-- Header: titolo in alto -->
     <top>
         <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
@@ -49,8 +49,8 @@
                 <Label text="Email:" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
                 <TextField fx:id="emailField" promptText="Inserisci email" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
                 
-                <Label text="Telefono:" GridPane.rowIndex="5" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
-                <TextField fx:id="phoneField" promptText="Inserisci numero di telefono" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                <Label text="Chat ID Telegram:" GridPane.rowIndex="5" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="telegramChatIdField" promptText="Inserisci il tuo Chat ID Telegram (opzionale)" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
             </GridPane>
             
             <!-- Spacer fra il form e i pulsanti -->

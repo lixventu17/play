@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,36 +16,48 @@
             <Label fx:id="resultTitle" text="Risultato" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
         </VBox>
     </top>
+    
+    <!-- Overlay di caricamento -->
     <center>
-        <VBox alignment="CENTER" spacing="30">
-            <!-- Sezione Dati -->
-            <VBox alignment="CENTER" spacing="10">
-                <Label fx:id="resultScore" text="Punteggio ottenuto" style="-fx-font-size: 18px;"/>
-                <Label fx:id="resultTime" text="Tempo impiegato" style="-fx-font-size: 18px;"/>
+        <VBox alignment="CENTER" spacing="20">
+            <!-- Contenuto principale -->
+            <VBox fx:id="mainContent" alignment="CENTER" spacing="30" visible="false">
+                <!-- Sezione Dati -->
+                <VBox alignment="CENTER" spacing="10">
+                    <Label fx:id="resultScore" text="Punteggio ottenuto" style="-fx-font-size: 18px;"/>
+                    <Label fx:id="resultTime" text="Tempo impiegato" style="-fx-font-size: 18px;"/>
+                </VBox>
+                <!-- Sezione Pulsanti -->
+                <VBox alignment="CENTER" spacing="20">
+                    <Label fx:id="nextText" text="Prossimo" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        			<Button fx:id="retryButton" text="Riprova" onAction="#handleRetryLevel" prefWidth="150"
+                    		style="-fx-background-color: #FAB228;"/>
+        			<Button fx:id="nextLevelButton" text="Vai" onAction="#handleNextLevel" prefWidth="150"
+                    		style="-fx-background-color: #7DC243;"/>
+                    <Label fx:id="medalText" text="Badge" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    <ImageView fx:id="imageMedal" preserveRatio="true"/>
+                </VBox>
             </VBox>
-            <!-- Sezione Pulsanti -->
-            <VBox alignment="CENTER" spacing="20">
-                <Label fx:id="nextText" text="Prossimo" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-    			<Button fx:id="retryButton" text="Riprova" onAction="#handleRetryLevel" prefWidth="150"
-                		style="-fx-background-color: #FAB228;"/>
-    			<Button fx:id="nextLevelButton" text="Vai" onAction="#handleNextLevel" prefWidth="150"
-                		style="-fx-background-color: #7DC243;"/>
-                <Label fx:id="medalText" text="Badge" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                <ImageView fx:id="imageMedal" preserveRatio="true"/>
+            
+            <!-- Rotellina di caricamento -->
+            <VBox fx:id="loadingContent" alignment="CENTER" spacing="20" visible="true">
+                <ProgressIndicator fx:id="loadingSpinner" prefWidth="60" prefHeight="60"/>
+                <Label fx:id="loadingLabel" text="Caricamento risultati..." style="-fx-font-size: 18px;"/>
             </VBox>
         </VBox>
     </center>
     <bottom>
         <VBox spacing="20" alignment="CENTER" BorderPane.alignment="CENTER">
+            <Label fx:id="confirmationLabel" text="" style="-fx-font-size: 16px; -fx-text-fill: #388e3c;" visible="false"/>
             <HBox spacing="20" alignment="CENTER">
                 <Button fx:id="emailSummaryButton" text=" Recap via Email" onAction="#sendEmailSummary" prefWidth="250"
-                        style="-fx-background-color: #000000;">
+                        style="-fx-background-color: #000000;" visible="false">
                     <graphic>
                         <ImageView fx:id="imageGmail" fitWidth="20" fitHeight="20" preserveRatio="true"/>
                     </graphic>
                 </Button>
                 <Button fx:id="telegramSummaryButton" text=" Recap via Telegram" onAction="#sendTelegramSummary" prefWidth="250"
-                        style="-fx-background-color: #000000;">
+                        style="-fx-background-color: #000000;" visible="false">
                     <graphic>
                         <ImageView fx:id="imageTelegram" fitWidth="20" fitHeight="20" preserveRatio="true"/>
                     </graphic>

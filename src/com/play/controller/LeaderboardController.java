@@ -1,29 +1,34 @@
 package com.play.controller;
 
-import com.play.model.User;
-import com.play.util.FileHandler;
-import com.play.util.UserSession;
-
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.play.model.User;
+import com.play.util.FileHandler;
+import com.play.util.UserSession;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
-public class LeaderboardController {
+/**
+ * Controller per la gestione della classifica degli utenti.
+ * Estende BaseController per ereditare funzionalità comuni.
+ */
+public class LeaderboardController extends BaseController {
     @FXML private TableView<UserScore> leaderboardTable;
     @FXML private TableColumn<UserScore, String> positionColumn;
     @FXML private TableColumn<UserScore, String> usernameColumn;
@@ -33,38 +38,81 @@ public class LeaderboardController {
 
 	private String currentUser;
 
+    /**
+     * Inizializza la vista della classifica.
+     * Configura le colonne della tabella e carica i dati degli utenti.
+     */
 	public void initialize() {
-        // Configura le colonne
+        try {
+            setupTableColumns();
+            loadUserData();
+        } catch (Exception e) {
+            handleError("Errore di inizializzazione", "Impossibile caricare la classifica: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Configura le colonne della tabella della classifica.
+     */
+    private void setupTableColumns() {
         positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
 
-    	UserSession session = UserSession.getInstance();
-        currentUser = session.getUsername();
-        
-        // Recupera i dati totali per ogni utente
-        Map<String, Integer> userTotal = fetchUserTotal();
-        // Ordina map in ordine decrescente rispetto al punteggio
-        List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(userTotal.entrySet());
-        sortedList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
+        // Configura il cell factory per la colonna username per mostrare l'immagine del profilo
+        usernameColumn.setCellFactory(column -> {
+            TableCell<UserScore, String> cell = new TableCell<UserScore, String>() {
+                private final HBox container = new HBox(10);
+                private final ImageView profileImage = new ImageView();
+                private final Label usernameLabel = new Label();
 
-        currentUserLabel.setText("Per entrare in classifica devi aver svolto almeno un esercizio!");
-        currentUserLabel.setStyle("-fx-text-fill: red; -fx-font-size: 20px;");
-        
-        // Crea la lista degli oggetti UserScore
-        ObservableList<UserScore> data = FXCollections.observableArrayList();
-        int rank = 1;
-        for (Map.Entry<String, Integer> entry : sortedList) {
-            if (entry.getKey().equalsIgnoreCase(currentUser)) {
-                setCurrentUserLabel(rank, entry.getValue());
-            }
-        	
-            data.add(new UserScore(String.valueOf(rank), entry.getKey(), entry.getValue()));
-            rank++;
-        }
-        leaderboardTable.setItems(data);
+                {
+                    container.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+                    profileImage.setFitHeight(20);
+                    profileImage.setFitWidth(20);
+                    profileImage.setPreserveRatio(true);
+                    profileImage.setSmooth(true);
+                    // Crea un cerchio come clip
+                    javafx.scene.shape.Circle clip = new javafx.scene.shape.Circle(10, 10, 10);
+                    profileImage.setClip(clip);
+                    container.getChildren().addAll(profileImage, usernameLabel);
+                }
 
+                @Override
+                protected void updateItem(String username, boolean empty) {
+                    super.updateItem(username, empty);
+                    if (empty || username == null) {
+                        setGraphic(null);
+                    } else {
+                        try {
+                            String imagePath = getProfileImagePath(username);
+                            // Carica l'immagine con dimensioni specificate
+                            Image image = new Image(imagePath, 20, 20, true, true);
+                            if (!image.isError()) {
+                                profileImage.setImage(image);
+                            }
+                            usernameLabel.setText(username);
+                            setGraphic(container);
+                        } catch (Exception e) {
+                            // Se c'è un errore nel caricamento dell'immagine, mostra solo il nome utente
+                            usernameLabel.setText(username);
+                            setGraphic(usernameLabel);
+                        }
+                    }
+                }
+            };
+            return cell;
+        });
+
+        // Configura le dimensioni delle colonne
         leaderboardTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        configureColumnWidths();
+    }
+
+    /**
+     * Configura le larghezze delle colonne della tabella.
+     */
+    private void configureColumnWidths() {
         leaderboardTable.getColumns().get(0).setMinWidth(200);
         leaderboardTable.getColumns().get(0).setPrefWidth(200);
         leaderboardTable.getColumns().get(0).setMaxWidth(200);
@@ -76,178 +124,235 @@ public class LeaderboardController {
         leaderboardTable.getColumns().get(2).setMaxWidth(300);
     }
 
+    /**
+     * Carica i dati degli utenti e popola la classifica.
+     */
+    private void loadUserData() {
+        UserSession session = UserSession.getInstance();
+        currentUser = session.getUsername();
+
+        Map<String, Integer> userTotal = fetchUserTotal();
+        List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(userTotal.entrySet());
+        sortedList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
+
+        ObservableList<UserScore> data = FXCollections.observableArrayList();
+        int rank = 1;
+        for (Map.Entry<String, Integer> entry : sortedList) {
+            if (entry.getKey().equalsIgnoreCase(currentUser)) {
+                setCurrentUserLabel(rank, entry.getValue());
+            }
+            data.add(new UserScore(String.valueOf(rank), entry.getKey(), entry.getValue()));
+            rank++;
+        }
+        leaderboardTable.setItems(data);
+    }
+
+    /**
+     * Recupera i punteggi totali degli utenti.
+     * @return Mappa con username e punteggio totale
+     */
     private Map<String, Integer> fetchUserTotal() {
     	Map<String, Integer> userTotal = new HashMap<>();
         try {
         	List<User> users = FileHandler.readUsers();
 	    	for (User user : users) {
-	        	List<String> userProgress = FileHandler.loadUserProgress(user.getUsername());
-	            int[] highTotals1 = new int[9];
-	            int[] highTotals2 = new int[9];
-		        for (String progress : userProgress) {
-		        	String[] parts = progress.split(";");
-		        	if (parts[0].equalsIgnoreCase("exercise1")) {
-		        		if (parts[1].equalsIgnoreCase("principiante")) {
-		        			if (Integer.parseInt(parts[2]) == 1) {
-		        				if (highTotals1[0] < Integer.parseInt(parts[6])) {
-		        					highTotals1[0] = Integer.parseInt(parts[6]);
-		        				}
-		        			}
-		                	else if (Integer.parseInt(parts[2]) == 2) {
-		        				if (highTotals1[1] < Integer.parseInt(parts[6])) {
-		        					highTotals1[1] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		                	else if (Integer.parseInt(parts[2]) == 3) {
-		        				if (highTotals1[2] < Integer.parseInt(parts[6])) {
-		        					highTotals1[2] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		        		}
-		            	else if (parts[1].equalsIgnoreCase("intermedio")) {
-		        			if (Integer.parseInt(parts[2]) == 1) {
-		        				if (highTotals1[3] < Integer.parseInt(parts[6])) {
-		        					highTotals1[3] = Integer.parseInt(parts[6]);
-		        				}
-		        			}
-		                	else if (Integer.parseInt(parts[2]) == 2) {
-		        				if (highTotals1[4] < Integer.parseInt(parts[6])) {
-		        					highTotals1[4] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		                	else if (Integer.parseInt(parts[2]) == 3) {
-		        				if (highTotals1[5] < Integer.parseInt(parts[6])) {
-		        					highTotals1[5] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		            	}
-		            	else if (parts[1].equalsIgnoreCase("esperto")) {
-		        			if (Integer.parseInt(parts[2]) == 1) {
-		        				if (highTotals1[6] < Integer.parseInt(parts[6])) {
-		        					highTotals1[6] = Integer.parseInt(parts[6]);
-		        				}
-		        			}
-		                	else if (Integer.parseInt(parts[2]) == 2) {
-		        				if (highTotals1[7] < Integer.parseInt(parts[6])) {
-		        					highTotals1[7] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		                	else if (Integer.parseInt(parts[2]) == 3) {
-		        				if (highTotals1[8] < Integer.parseInt(parts[6])) {
-		        					highTotals1[8] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		            	}
-		        	}
-		        	else if (parts[0].equalsIgnoreCase("exercise2")) {
-		        		if (parts[1].equalsIgnoreCase("principiante")) {
-		        			if (Integer.parseInt(parts[2]) == 1) {
-		        				if (highTotals2[0] < Integer.parseInt(parts[6])) {
-		        					highTotals2[0] = Integer.parseInt(parts[6]);
-		        				}
-		        			}
-		                	else if (Integer.parseInt(parts[2]) == 2) {
-		        				if (highTotals2[1] < Integer.parseInt(parts[6])) {
-		        					highTotals2[1] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		                	else if (Integer.parseInt(parts[2]) == 3) {
-		        				if (highTotals2[2] < Integer.parseInt(parts[6])) {
-		        					highTotals2[2] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		        		}
-		            	else if (parts[1].equalsIgnoreCase("intermedio")) {
-		        			if (Integer.parseInt(parts[2]) == 1) {
-		        				if (highTotals2[3] < Integer.parseInt(parts[6])) {
-		        					highTotals2[3] = Integer.parseInt(parts[6]);
-		        				}
-		        			}
-		                	else if (Integer.parseInt(parts[2]) == 2) {
-		        				if (highTotals2[4] < Integer.parseInt(parts[6])) {
-		        					highTotals2[4] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		                	else if (Integer.parseInt(parts[2]) == 3) {
-		        				if (highTotals2[5] < Integer.parseInt(parts[6])) {
-		        					highTotals2[5] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		            	}
-		            	else if (parts[1].equalsIgnoreCase("esperto")) {
-		        			if (Integer.parseInt(parts[2]) == 1) {
-		        				if (highTotals2[6] < Integer.parseInt(parts[6])) {
-		        					highTotals2[6] = Integer.parseInt(parts[6]);
-		        				}
-		        			}
-		                	else if (Integer.parseInt(parts[2]) == 2) {
-		        				if (highTotals2[7] < Integer.parseInt(parts[6])) {
-		        					highTotals2[7] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		                	else if (Integer.parseInt(parts[2]) == 3) {
-		        				if (highTotals2[8] < Integer.parseInt(parts[6])) {
-		        					highTotals2[8] = Integer.parseInt(parts[6]);
-		        				}
-		                	}
-		            	}
-		        	}
-		        }
-	            int totalScore = 0;
-	            for (int i = 0; i < highTotals1.length; i++) {
-	            	totalScore += (highTotals1[i] + highTotals2[i]);
-	            }
-	            userTotal.put(user.getUsername(), totalScore);
-	    	}
-        } catch(IOException e) {
-            e.printStackTrace();
+                int totalScore = calculateUserTotalScore(user);
+                userTotal.put(user.getUsername(), totalScore);
+            }
+        } catch (IOException e) {
+            handleError("Errore di lettura", "Impossibile leggere i dati degli utenti: " + e.getMessage());
         }
         return userTotal;
     }
 
-    private void setCurrentUserLabel(int rank, int totalScore) {
-        currentUserLabel.setText(rank + "     |     " + currentUser + "     |     " + totalScore);
-        currentUserLabel.setStyle("-fx-font-size: 20px;");
+    /**
+     * Calcola il punteggio totale di un utente.
+     * @param user L'utente di cui calcolare il punteggio
+     * @return Il punteggio totale
+     */
+    private int calculateUserTotalScore(User user) {
+	        	List<String> userProgress = FileHandler.loadUserProgress(user.getUsername());
+	            int[] highTotals1 = new int[9];
+	            int[] highTotals2 = new int[9];
+        
+		        for (String progress : userProgress) {
+            processProgressEntry(progress, highTotals1, highTotals2);
+        }
+        
+        return calculateTotalScore(highTotals1, highTotals2);
     }
-    
-    @FXML
-    private void handleBackToHomepage() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/play/view/homepage.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("/com/play/application.css").toExternalForm());
-            stage.setScene(scene);
-            stage.setTitle("Homepage");
-            stage.show();
-        } catch(IOException e) {
-            e.printStackTrace();
+
+    /**
+     * Processa una singola entry di progresso.
+     */
+    private void processProgressEntry(String progress, int[] highTotals1, int[] highTotals2) {
+        String[] parts = progress.split(";");
+        if (parts.length < 7) return;
+
+        String exerciseId = parts[0];
+        String level = parts[1];
+        int levelIndex = Integer.parseInt(parts[2]) - 1;
+        int score = Integer.parseInt(parts[6]);
+
+        if (exerciseId.equalsIgnoreCase("exercise1")) {
+            updateHighScore(highTotals1, level, levelIndex, score);
+        } else if (exerciseId.equalsIgnoreCase("exercise2")) {
+            updateHighScore(highTotals2, level, levelIndex, score);
         }
     }
-    
-    // Classe helper per rappresentare un record di classifica
+
+    /**
+     * Aggiorna il punteggio più alto per un livello specifico.
+     */
+    private void updateHighScore(int[] highTotals, String level, int levelIndex, int score) {
+        int baseIndex = getBaseIndex(level);
+        if (baseIndex >= 0 && levelIndex >= 0 && levelIndex < 3) {
+            int index = baseIndex + levelIndex;
+            if (highTotals[index] < score) {
+                highTotals[index] = score;
+            }
+        }
+    }
+
+    /**
+     * Ottiene l'indice base per il livello specificato.
+     */
+    private int getBaseIndex(String level) {
+        switch (level.toLowerCase()) {
+            case "principiante": return 0;
+            case "intermedio": return 3;
+            case "esperto": return 6;
+            default: return -1;
+        }
+    }
+
+    /**
+     * Calcola il punteggio totale dai punteggi dei due esercizi.
+     */
+    private int calculateTotalScore(int[] highTotals1, int[] highTotals2) {
+        int totalScore = 0;
+        for (int i = 0; i < highTotals1.length; i++) {
+            totalScore += (highTotals1[i] + highTotals2[i]);
+        }
+        return totalScore;
+    }
+
+    /**
+     * Ottiene il percorso dell'immagine del profilo per un utente.
+     * @param username L'username dell'utente
+     * @return Il percorso dell'immagine del profilo
+     */
+    private String getProfileImagePath(String username) {
+        try {
+            List<User> users = FileHandler.readUsers();
+            for (User user : users) {
+                if (user.getUsername().equals(username)) {
+                    String customPath = user.getProfilePicturePath();
+                    if (customPath != null && !customPath.isEmpty()) {
+                        // Prova prima nella cartella resources
+                        File imageFile = new File("resources/com/play/images/profiles/" + customPath);
+                        if (imageFile.exists() && imageFile.canRead()) {
+                            return imageFile.toURI().toString();
+                        }
+                        // Se non la trova in resources, prova nella cartella bin
+                        imageFile = new File("bin/com/play/images/profiles/" + customPath);
+                        if (imageFile.exists() && imageFile.canRead()) {
+                            return imageFile.toURI().toString();
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            handleError("Errore di lettura", "Impossibile leggere i dati degli utenti: " + e.getMessage());
+        }
+        return getClass().getResource("/com/play/images/user.png").toExternalForm();
+    }
+
+    /**
+     * Imposta l'etichetta dell'utente corrente.
+     */
+    private void setCurrentUserLabel(int rank, int totalScore) {
+        HBox userBox = new HBox(10);
+        userBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+        Label rankLabel = new Label(String.valueOf(rank));
+        rankLabel.setStyle("-fx-font-size: 20px;");
+
+        ImageView profileImage = new ImageView();
+        try {
+            String imagePath = getProfileImagePath(currentUser);
+            
+            // Carica l'immagine con dimensioni specificate
+            Image image = new Image(imagePath, 20, 20, true, true);
+            if (image.isError()) {
+                System.err.println("Errore nel caricamento dell'immagine: " + imagePath);
+                throw new Exception("Errore nel caricamento dell'immagine");
+            }
+            
+            profileImage.setImage(image);
+            profileImage.setFitHeight(20);
+            profileImage.setFitWidth(20);
+            profileImage.setPreserveRatio(true);
+            profileImage.setSmooth(true);
+
+            // Crea un cerchio come clip
+            javafx.scene.shape.Circle clip = new javafx.scene.shape.Circle(10, 10, 10);
+            profileImage.setClip(clip);
+        } catch (Exception e) {
+            System.err.println("Errore nel caricamento dell'immagine: " + e.getMessage());
+            try {
+                Image defaultImage = new Image(getClass().getResourceAsStream("/com/play/images/user.png"), 20, 20, true, true);
+                profileImage.setImage(defaultImage);
+                // Applica lo stesso clip anche all'immagine di default
+                javafx.scene.shape.Circle clip = new javafx.scene.shape.Circle(10, 10, 10);
+                profileImage.setClip(clip);
+            } catch (Exception ex) {
+                System.err.println("Errore nel caricamento dell'immagine di default: " + ex.getMessage());
+            }
+        }
+
+        Label usernameLabel = new Label(currentUser);
+        usernameLabel.setStyle("-fx-font-size: 20px;");
+
+        Label scoreLabel = new Label(String.valueOf(totalScore));
+        scoreLabel.setStyle("-fx-font-size: 20px;");
+
+        userBox.getChildren().addAll(
+            rankLabel,
+            new Label("|"),
+            profileImage,
+            usernameLabel,
+            new Label("|"),
+            scoreLabel
+        );
+
+        currentUserLabel.setGraphic(userBox);
+    }
+
+    /**
+     * Gestisce il click sul pulsante di ritorno alla homepage.
+     */
+    @FXML
+    private void handleBackToHomepage() {
+        navigateToPage("/com/play/view/homepage.fxml", backButton, "Homepage");
+    }
+
+    /**
+     * Classe interna per rappresentare un record di classifica.
+     */
     public static class UserScore {
-        private String position;
-        private String username;
-        private int score;
-        
+        private final String position;
+        private final String username;
+        private final int score;
+
         public UserScore(String position, String username, int score) {
             this.position = position;
             this.username = username;
             this.score = score;
         }
-        
-        public String getPosition() {
-            return position;
-        }
-        
-        public String getUsername() {
-            return username;
-        }
-        
-        public int getScore() {
-            return score;
-        }
+
+        public String getPosition() { return position; }
+        public String getUsername() { return username; }
+        public int getScore() { return score; }
     }
 }

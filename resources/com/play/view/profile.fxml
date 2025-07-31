@@ -7,12 +7,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.event.ActionEvent?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.play.controller.ProfileController">
     <!-- Header: titolo in alto -->
@@ -50,8 +53,15 @@
                 <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
                 <TextField fx:id="emailField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
                 
-                <Label text="Telefono:" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
-                <TextField fx:id="phoneField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                <Label text="Chat ID Telegram:" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
+                <StackPane alignment="CENTER_LEFT" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                    <TextField fx:id="telegramChatIdField" promptText="Inserisci il tuo Chat ID Telegram" maxWidth="Infinity"/>
+                    <Button fx:id="infoChatIdButton" onAction="#handleInfoChatId" styleClass="info-icon-button" StackPane.alignment="CENTER_RIGHT">
+                        <graphic>
+                            <ImageView fx:id="infoIcon" fitWidth="20" fitHeight="20" />
+                        </graphic>
+                    </Button>
+                </StackPane>
                 
                 <Label text="Invio automatico:" GridPane.rowIndex="5" GridPane.columnIndex="0" style="-fx-font-size: 18px;"/>
                 <CheckBox fx:id="autoSendCheckBox" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
@@ -64,7 +74,7 @@
             <HBox alignment="CENTER" spacing="20">
                 <Button text="Indietro" onAction="#handleBackToHomepage" prefWidth="150"
                         style="-fx-background-color: #E53935;"/>
-                <Button fx:id="saveButton" text="Salva" onAction="#handleSave" prefWidth="150"
+                <Button fx:id="saveButton" text="Salva" onAction="#handleSaveProfile" prefWidth="150"
                         style="-fx-background-color: #039BE5;"/>
             </HBox>
             
